@@ -1,0 +1,26 @@
+.table-nobordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+    border: 0px solid transparent;
+}
+
+.ligne-engagement{
+	margin-top:10px;
+}
+.bg-engagement{
+	background-color: #44a582;
+	color:white;
+}
+.ligne-engagement .bg-engagement{
+	border-radius: 5px;
+}
+.btn-ligne-detail{
+	margin-top:10px;
+}
+.etat-engagement{
+	border:1px solid #44a582 ;
+	padding:8px;
+	border-radius: 5px;
+}
+.cadre-commentaire{
+	border:1px solid #44a582 ;
+	border-radius: 5px;
+}
