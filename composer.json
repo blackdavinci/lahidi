@@ -21,7 +21,8 @@
         "laracasts/utilities": "~2.0", 
         "maatwebsite/excel": "~2.1.0",
         "dusterio/link-preview": "~1.2",
-        "kasp3r/link-preview": "dev-master"
+        "kasp3r/link-preview": "dev-master",
+        "cviebrock/eloquent-sluggable":"^4.0.2"
     },
     "autoload": {
         "classmap": [

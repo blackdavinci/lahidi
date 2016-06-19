@@ -17,7 +17,7 @@ Route::get('/','HomeController@index');
 
 Route::get('accueil',['as'=>'guest.accueil','uses'=>'GuestController@index']);
 
-Route::get('promesses-president',['as'=>'guest.president','uses'=>'GuestController@president']);
+Route::get('promesses-president',['as'=>'guest.president','uses'=>'GuestController@promesses']);
 
 Route::get('promesses-gouvernement',['as'=>'guest.gouvernement','uses'=>'GuestController@gouvernement']);
 
@@ -30,6 +30,8 @@ Route::get('webactu',['as'=>'guest.webactu','uses'=>'GuestController@webactu']);
 Route::get('rapports',['as'=>'guest.rapports','uses'=>'GuestController@rapports']);
 
 Route::get('blog',['as'=>'guest.forum','uses'=>'GuestController@blog']);
+
+Route::get('detail-promesse/{id}',['as'=>'guest.engagementDetail','uses'=>'GuestController@show']);
 
 
 

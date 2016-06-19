@@ -11,6 +11,7 @@
 }
 .ligne-engagement .bg-engagement{
 	border-radius: 5px;
+
 }
 .btn-ligne-detail{
 	margin-top:10px;
@@ -19,6 +20,12 @@
 	border:1px solid #44a582 ;
 	padding:8px;
 	border-radius: 5px;
+}
+.cadre-engagement{
+	padding-left:30px;
+}
+.ligne-commentaire{
+	margin-top:5px;
 }
 .cadre-commentaire{
 	border:1px solid #44a582 ;

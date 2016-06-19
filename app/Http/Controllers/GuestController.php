@@ -66,27 +66,37 @@ class GuestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function president()
+    public function promesses()
     {
     	$active = 'promesses';
-    	// $categorie = 'president';
-    	// $engagements = Engagement::with('secteur', 'categorie','etats')->whereHas('categorie', function($query){
-    	//     $query->where('type', '=', 'president');
-    	// })->paginate(15);
+    
     	
-   		$engagements = Engagement::with('secteur','categorie','etats')->where('etat',1)->orderBy('updated_at','desc')->paginate(15);
+   		$engagements = Engagement::with('secteur','categorie','etats')
+                                    ->where('etat',1)->orderBy('updated_at','desc')->paginate(15);
     	$categories = Categorie::with('engagements')->where('type','president')->get();
     	$secteurs = Secteur::where('etat',1)->get();
     	$categorie = Categorie::where('etat',1)->get();
     	$etats = Etat::where('etat',1)->get();
     	$commentaires = Commentaire::where('etat',1)->get();
     	
-    	
-    	
-    	
-    	// dd();
 
-        return view('guest.president',compact('active','categorie','secteurs','categories','etats','commentaires','engagements'));
+        return view('guest.president',compact('active','categorie','secteurs','categories','etats',
+                                            'commentaires','engagements'));
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+       $active = 'promesses';
+       $engagement = Engagement::where('etat',1)->findOrFail($id);
+
+       return view('guest.detail',compact('active','engagement'));
     }
 
     /**

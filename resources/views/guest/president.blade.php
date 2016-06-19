@@ -49,7 +49,7 @@
 				
 				<div class="row ligne-engagement ">
 					<a data-toggle="collapse" href="#comment{{$engagement->id}}" aria-expanded="false" aria-controls="collapseExample">
-					<div class="col-md-8 ">
+					<div class="col-md-8 cadre-engagement">
 					<div class="col-md-12 bg-engagement">
 						<div class="col-md-12 type-engagement">
 							<h5 class="text-uppercase"><strong>{{$engagement->categorie->designation}}</strong></h5>
@@ -80,9 +80,10 @@
 					</div>
 				</div>
 				<div class="row ligne-commentaire collapse"  id="comment{{$engagement->id}}">
-					<div class="col-md-6 cadre-commentaire">
+					<div class="col-md-7 col-md-offset-1 ">
+					<div class="col-md-12 cadre-commentaire"> 
 						@foreach($engagement->etats as $etat)
-						<div class="col-md-4">
+						<div class="col-md-12">
 							<h4>
 								<span class="label label-info">
 									<i class="fa {{$etat->img}} fa-1x" aria-hidden="true"></i> {{$etat->designation}}
@@ -91,7 +92,7 @@
 						</div>
 							@foreach($commentaires as $commentaire)
 								@if($commentaire->engagement_etat_id==$etat->pivot->id)
-								<div class="col-md-10 col-md-offset-6 ">
+								<div class="col-md-12 ">
 									{{--*/ $i=1 /*--}}
 									<h4>
 										{{$commentaire->titre}}
@@ -101,6 +102,12 @@
 								@endif
 							@endforeach
 						@endforeach
+							<div class="col-md-12 btn-ligne-detail">
+								<p>
+									<a href="{{route('guest.engagementDetail',$engagement->id)}}" class="btn btn-danger" role="button" >En savoir plus &raquo;</a>
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 				@if($i==1)

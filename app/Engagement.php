@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Engagement extends Model
 {
+
+    use Sluggable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -14,7 +18,21 @@ class Engagement extends Model
     public $timestamps = true;
     
      protected $fillable = ['intitule','description','etat','source','note','localite','prefecture','sous_prefecture',
-                    'district','date_debut','date_fin','valider','secteur_id','categorie_id','user_id'];
+                    'district','date_debut','date_fin','valider','secteur_id','categorie_id','user_id','slug'];
+
+     /**
+          * Return the sluggable configuration array for this model.
+          *
+          * @return array
+          */
+         public function sluggable()
+         {
+             return [
+                 'slug' => [
+                     'source' => 'intitule'
+                 ]
+             ];
+         }
 
      /**
      * The relationship.

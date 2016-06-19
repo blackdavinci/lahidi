@@ -30,7 +30,7 @@ class EngagementController extends Controller
     public function index()
     {
         $active = 'engagement';
-        $engagements = Engagement::with('secteur','categorie')->where('etat',1)->orderBy('created_at','asc')->get();
+        $engagements = Engagement::with('secteur','categorie')->where('etat',1)->orderBy('updated_at','desc')->get();
         $secteurs = Secteur::where('etat',1)->orderBy('nom','asc')->get();
         $categories = Categorie::where('etat',1)->orderBy('designation','asc')->get();
         $nombre_engagement = count($engagements);
@@ -98,12 +98,24 @@ class EngagementController extends Controller
                                     'date_fin' => $value->fin,
                                     'created_at' => Carbon::now() ,
                                     'updated_at' => Carbon::now()];
+        
+                    Engagement::create(['intitule' => $value->intitule, 'description' => $value->description,
+                                    'secteur_id' => $value->secteur,
+                                    'categorie_id' => $value->categorie,
+                                    'source' => $value->source,
+                                    'note' => $value->note,
+                                    'localite' => $value->localite,
+                                    'prefecture' => $value->prefecture,
+                                    'sous_prefecture' => $value->sous_prefecture,
+                                    'district' => $value->district,
+                                    'date_debut' => $value->debut,
+                                    'date_fin' => $value->fin]);
                     }
                 }
                 if(!empty($insert)){
                     
                   
-                    DB::table('engagements')->insert($insert);
+                    // DB::table('engagements')->insert($insert);
                     
                 }
             }
@@ -151,7 +163,7 @@ class EngagementController extends Controller
        $etats = Etat::where('etat',1)->get();  
        
        
-       return view('admin.detail-engagement',compact('engagement','active','etats','commentaires'));
+       return view('admin.detail-engagement',compact('engagement','active','etats','commentaires','slug'));
     }
 
     /**
