@@ -104,7 +104,7 @@
 						@endforeach
 							<div class="col-md-12 btn-ligne-detail">
 								<p>
-									<a href="{{route('guest.engagementDetail',$engagement->id)}}" class="btn btn-danger" role="button" >En savoir plus &raquo;</a>
+									<a href="{{route('guest.engagementDetail',$engagement->slug)}}" class="btn btn-danger" role="button" >En savoir plus &raquo;</a>
 								</p>
 							</div>
 						</div>

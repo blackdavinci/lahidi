@@ -140,7 +140,7 @@
       <footer>
         @yield('footer')
         <p class="pull-right">&nbsp;| <a href="#"> Haut</a></p>
-        <p class="pull-right">Un projet de <a href="http:\\www.ablogui.com">l'Association des Blogueurs de Guinée</a></p>
+        <p class="pull-right">Un projet de <a href="http:\\www.ablogui.com">MOSSEP</a></p>
         <p>&copy; 2016 LAHIDI. &middot; <a href="#">Condition générale</a> &middot; <a href="#">Terms</a></p>
       </footer>
 

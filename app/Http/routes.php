@@ -31,7 +31,7 @@ Route::get('rapports',['as'=>'guest.rapports','uses'=>'GuestController@rapports'
 
 Route::get('blog',['as'=>'guest.forum','uses'=>'GuestController@blog']);
 
-Route::get('detail-promesse/{id}',['as'=>'guest.engagementDetail','uses'=>'GuestController@show']);
+Route::get('detail-promesse/{slug}',['as'=>'guest.engagementDetail','uses'=>'GuestController@show']);
 
 
 

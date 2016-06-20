@@ -69,3 +69,5 @@
 
 	<!-- /END THE FEATURETTES -->
 @endsection
+
+@include('footer')

@@ -138,6 +138,7 @@
 				@yield('footer-sidebar-right')			
 			</div><!--/.col-->
 		</div><!--/.row-->
+
 	</div>	<!--/.main-->
 
 	<!-- jQuery -->
@@ -177,6 +178,7 @@
 	<!-- Custom  Javascript Function -->
 	{!! HTML::script('js/custom-function.js') !!}
 	
+	@yield('script')
 	
 </body>
 

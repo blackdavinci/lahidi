@@ -18,6 +18,7 @@ use App\Secteur;
 
 use DB;
 use Preview;
+use JavaScript;
 use stdClass;
 
 class GuestController extends Controller
@@ -57,6 +58,17 @@ class GuestController extends Controller
       //   }
 
       //   dd();
+       $secteur = Secteur::get();
+       $secteurs = json_encode($secteur);
+       foreach ($secteur as $key => $value) {
+           
+       }
+       JavaScript::put([
+        'secteur' => $secteur
+         ]);
+         
+
+    
     	$active = 'home';
         return view('guest.home',compact('active'));
     }
@@ -91,12 +103,12 @@ class GuestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
        $active = 'promesses';
-       $engagement = Engagement::where('etat',1)->findOrFail($id);
+       $engagement = Engagement::where('etat',1)->where('slug',$slug)->first();
 
-       return view('guest.detail',compact('active','engagement'));
+       return view('guest.detail',compact('active','engagement','slug'));
     }
 
     /**
