@@ -13,6 +13,8 @@
 
 Route::get('/','HomeController@index');
 
+Route::get('test','GuestController@test');
+
 // Guest Route
 
 Route::get('accueil',['as'=>'guest.accueil','uses'=>'GuestController@index']);

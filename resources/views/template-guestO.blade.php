@@ -32,12 +32,97 @@
 
 {!! Html::style('css/datepicker3.css') !!}
     
-<!-- Google & Highcharts Charts -->
+<!-- Google Charts Scripts -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {packages: ['corechart','bar']});
 
-<script type="text/javascript" src="js/jquery-1.12.3.js"></script>
-<script src="http://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+  // Draw the Bar chart for Source.
+  google.charts.setOnLoadCallback(drawChartSource);
+
+  // Draw the Bar chart for Secteur.
+  google.charts.setOnLoadCallback(drawChartSecteur);
+
+  // Draw the Bar chart for Etat.
+  google.charts.setOnLoadCallback(drawChartEtat);
+
+  // Callback that draws the pie chart for Sarah's pizza.
+        function drawChartSource() {
+
+          // Create the data table for Sarah's pizza.
+          var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses', 'Profit'],
+          ['2014', 1000, 400, 200],
+          ['2015', 1170, 460, 250],
+          ['2016', 660, 1120, 300],
+          ['2017', 1030, 540, 350]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Company Performance',
+            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+          }
+        };
+
+
+          // Instantiate and draw the chart for Sarah's pizza.
+         var chart = new google.charts.Bar(document.getElementById('source_chart_div'));
+                 chart.draw(data, options);
+          }
+
+        // Callback that draws the pie chart for Anthony's pizza.
+        function drawChartSecteur() {
+
+          // Create the data table for Anthony's pizza.
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Topping');
+          data.addColumn('number', 'Slices');
+          data.addRows([
+            ['Mushrooms', 2],
+            ['Onions', 2],
+            ['Olives', 2],
+            ['Zucchini', 0],
+            ['Pepperoni', 3]
+          ]);
+
+          // Set options for Anthony's pie chart.
+          var options = {title:'How Much Pizza Anthony Ate Last Night',
+                         width:400,
+                         height:300};
+
+          // Instantiate and draw the chart for Anthony's pizza.
+          var chart = new google.visualization.PieChart(document.getElementById('secteur_chart_div'));
+          chart.draw(data, options);
+        }
+
+        // Callback that draws the pie chart for Sarah's pizza.
+              function drawChartEtat() {
+
+                // Create the data table for Sarah's pizza.
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Topping');
+                data.addColumn('number', 'Slices');
+                data.addRows([
+                  ['Mushrooms', 1],
+                  ['Onions', 1],
+                  ['Olives', 2],
+                  ['Zucchini', 2],
+                  ['Pepperoni', 1]
+                ]);
+
+                // Set options for Sarah's pie chart.
+                var options = {title:'How Much Pizza Sarah Ate Last Night',
+                               width:400,
+                               height:300};
+
+                // Instantiate and draw the chart for Sarah's pizza.
+                var chart = new google.visualization.PieChart(document.getElementById('etat_chart_div'));
+                chart.draw(data, options);
+              }
+
+
+</script>
 
   </head>
 <!-- NAVBAR
@@ -139,6 +224,8 @@
     <div class="container marketing">
         @yield('content')
      
+
+
       <!-- FOOTER -->
       <footer>
         @yield('footer')
@@ -149,27 +236,7 @@
 
     </div><!-- /.container -->
 
-  <!-- HighCharts Script -->
-@if($active=='home')
-  <script type="text/javascript">
-    jQuery(document).ready(function($) {
-      $(function () {
-             $('#source').highcharts(
-             
-                 {!! json_encode($sourceChart) !!}
-             );
 
-             $('#secteur').highcharts(
-                 {!! json_encode($sourceChart) !!}
-             );
-
-             $('#etat').highcharts(
-                 {!! json_encode($sourceChart) !!}
-             );
-      })
-    });
-  </script>
-@endif
    <!-- jQuery -->
    {!! HTML::script('js/jquery-1.12.3.js') !!}
    

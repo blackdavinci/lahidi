@@ -57,6 +57,7 @@ class EngagementController extends Controller
     public function store(Request $request)
     {
         Engagement::create($request->all());
+        
         return back();
     }
 
@@ -99,7 +100,7 @@ class EngagementController extends Controller
                                     'created_at' => Carbon::now() ,
                                     'updated_at' => Carbon::now()];
         
-                    Engagement::create(['intitule' => $value->intitule, 'description' => $value->description,
+                    $engagement = Engagement::create(['intitule' => $value->intitule, 'description' => $value->description,
                                     'secteur_id' => $value->secteur,
                                     'categorie_id' => $value->categorie,
                                     'source' => $value->source,
@@ -110,6 +111,8 @@ class EngagementController extends Controller
                                     'district' => $value->district,
                                     'date_debut' => $value->debut,
                                     'date_fin' => $value->fin]);
+                    $defaultEtat = Etat::select('id')->where('designation','Pas encore tenu')->get();
+                    $engagement->etats()->attach($defaultEtat->id);
                     }
                 }
                 if(!empty($insert)){
@@ -200,7 +203,7 @@ class EngagementController extends Controller
      */
     public function addEtat(Request $request, $id)
     {
-        var_dump($request->all());
+        
         $engagement = Engagement::findOrFail($id);
         $engagement->etats()->attach($request->input('etat_id'), ['titre_commentaire' => $request->input('titre_commentaire'), 
                                             'commentaire'=>$request->input('commentaire')]);

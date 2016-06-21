@@ -1,5 +1,31 @@
 jQuery(document).ready(function($) {
-	
+
+
+                  $('#container').highcharts({
+                      chart: {
+                          type: 'bar'
+                      },
+                      title: {
+                          text: 'Fruit Consumption'
+                      },
+                      xAxis: {
+                          categories: ['Apples', 'Bananas', 'Oranges']
+                      },
+                      yAxis: {
+                          title: {
+                              text: 'Fruit eaten'
+                          }
+                      },
+                      series: [{
+                          name: 'Jane',
+                          data: [1, 0, 4]
+                      }, {
+                          name: 'John',
+                          data: [5, 7, 3]
+                      }]
+                  });
+        
+     
 	
 	$('[data-toggle="tooltip"]').tooltip();
 
@@ -43,6 +69,12 @@ jQuery(document).ready(function($) {
 	$('#myTabs a').click(function (e) {
 	  e.preventDefault()
 	  $(this).tab('show')
-	})
+	});
+
+	// HIGHCHARTS FUNCTION
+
+
+
+
 	
 });

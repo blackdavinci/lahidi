@@ -23,6 +23,21 @@ use stdClass;
 
 class GuestController extends Controller
 {
+
+    public function test(){
+      $hello = 'Hello';
+      $sourceChart["credits"] = array("enabled"=>false);
+      $sourceChart["chart"] = array("type" => "bar");
+      $sourceChart["title"] = array("text" => "Fruit Consumption");
+      $sourceChart["xAxis"] = array("categories" => ['Apples', 'Bananas', 'Oranges']);
+      $sourceChart["yAxis"] = array("title" => array("text" => "Fruit eaten"));
+
+      $sourceChart["series"] = [
+          array("name" => "Jane", "data" => [1,0,4]),
+          array("name" => "John", "data" => [5,7,3])
+      ];
+      return view('test',compact('hello','sourceChart'));
+    }
     /**
      * Accueil function.
      *
@@ -58,6 +73,8 @@ class GuestController extends Controller
       //   }
 
       //   dd();
+
+
        $secteur = Secteur::get();
        $secteurs = json_encode($secteur);
        foreach ($secteur as $key => $value) {
@@ -66,11 +83,70 @@ class GuestController extends Controller
        JavaScript::put([
         'secteur' => $secteur
          ]);
-         
+      
+      $sources_president = Categorie::withCount(['engagements'=>function($query){
+          $query->where('etat',1);}])->where('etat',1)->where('type','president')->get();
 
+       $sources_gouvernement = Categorie::withCount(['engagements'=>function($query){
+          $query->where('etat',1);}])->where('etat',1)->where('type','gouvernement')->get();
+
+       $type_engagements = Engagement::withCount(['categorie'=>function($query){
+          $query->where('etat',1);}])->where('etat',1)->get();
+       
+
+  dd();
+
+// Variables de compte 
+  $count_sources_president =0;
+  $count_sources_gouvernement =0;
+
+// Président
+  foreach ($sources_president as $key => $value) {
+    $count_sources_president += count($value->engagements);
+  }
+  foreach ($sources_president as $key => $value) {
+   
+   if($key==0){
+      $data_sources[]= ["name"=>$value->type,"y"=>$count_sources_president,"drilldown"=>$value->type];
+   }
+   $data_sources_drilldown_president [] =[$value->designation,$value->engagements_count];
+  }
+
+// Gouvernement
+  foreach ($sources_gouvernement as $key => $value) {
+    $count_sources_gouvernement += count($value->engagements);
+  }
+  
+  foreach ($sources_gouvernement as $key => $value) {
+   if($key==0){
+      $data_sources[]= ["name"=>$value->type,"y"=>$count_sources_gouvernement,"drilldown"=>$value->type];
+   }
+      $data_sources_drilldown_gouvernement [] =[$value->designation,$value->engagements_count];
+
+  }
+
+
+      $sourceChart["chart"] = ["type" => "pie"];
+      $sourceChart['credits'] = ['enabled'=>false];
+      $sourceChart['legend'] = ['enabled'=>false];
+      $sourceChart["title"] = ["text" => "Source"];
+      $sourceChart["subtitle"] = ["text" => "Cliquez sur la colonne pour plus de détails"];
+      $sourceChart["xAxis"] = ["type"=>"category"];
+      $sourceChart["yAxis"] = ["title"=>["text"=>"Nombre de promesses"]];
+
+
+      $sourceChart["series"] =[["name"=>"Source","colorByPoint"=>true,"data"=>$data_sources]];
+
+      $sourceChart["drilldown"]["series"]=[["name"=>"Président","id"=>"Président","data"=>$data_sources_drilldown_president ],["name"=>"Gouvernement","id"=>"Gouvernement","data"=>$data_sources_drilldown_gouvernement]];
+
+      // var_dump($sourceChart["drilldown"]["series"]);
+      // var_dump($data_sources);
+      // var_dump(json_encode($sourceChart["series"]));
+      // dd(json_encode($sourceChart));
+      // dd();
     
     	$active = 'home';
-        return view('guest.home',compact('active'));
+        return view('guest.home',compact('active','sourceChart'));
     }
 
     /**
