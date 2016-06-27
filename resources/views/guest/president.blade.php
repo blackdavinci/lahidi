@@ -1,20 +1,20 @@
-@extends('template-guest')
+@extends('template')
 
 @section('title','Promesses du président')
 
 @section('content')
 	<div class="row">
 		<div class="col-md-12">
-			<h2>Toutes les promesses \<small> Agriculture</small></h2>
+			<h2>Toutes les promesses \<small>  </small></h2>
 		</div>
 		<div class="col-md-12">
-			<form class="form-inline">
+			 {!! Form::open(['method' =>'POST','route' =>['guest.promessesfilter']]) !!}
 			  <div class="form-group col-md-2">
 			    <label class="sr-only" for="exampleInputEmail3">Catégorie</label>
 			    <select name="categorie" id="categorie" class="form-control" >
 			    	<option value="">Aucun</option>
 			    	@foreach($categorie as $categorie)
-			    		<option value="{{$categorie->designation}}">{{$categorie->designation}}</option>
+			    		<option value="{{$categorie->id}}">{{$categorie->designation}}</option>
 			    	@endforeach
 			    </select>
 			  </div>
@@ -23,7 +23,7 @@
 			    <select name="secteur" id="secteur" class="form-control" >
 			    	<option value="">Aucun</option>
 			    	@foreach($secteurs as $secteur)
-			   			<option value="{{$secteur->nom}}">{{$secteur->nom}}</option>
+			   			<option value="{{$secteur->id}}">{{$secteur->nom}}</option>
 			   		@endforeach
 			    </select>
 			  </div>
@@ -32,27 +32,33 @@
 			   <select name="etat" id="etat" class="form-control" >
 			   	<option value="">Aucun</option>
 			   	@foreach($etats as $etat)
-			   		<option value="{{$etat->designation}}">{{$etat->designation}}</option>
+			   		<option value="{{$etat->id}}">{{$etat->designation}}</option>
 			   	@endforeach
 			   </select>
 			  </div>
 			
 			  <button type="submit" class="btn btn-default text-uppercase">Valider</button>
-			</form>
+			 {!! Form::close() !!}
 		</div>
 		<p>&nbsp;</p>
 		<div class="col-md-12">
 			
 			@foreach($engagements as $engagement)
-				<div class="row">
+				<div class="row" style="margin-bottom: 0px;">
 				{{--*/ $i=0 /*--}}
 				
 				<div class="row ligne-engagement ">
 					<a data-toggle="collapse" href="#comment{{$engagement->id}}" aria-expanded="false" aria-controls="collapseExample">
-					<div class="col-md-8 cadre-engagement">
-					<div class="col-md-12 bg-engagement">
+					<div class="col-md-8 cadre-engagement-home">
+					<div class="col-md-12 ">
 						<div class="col-md-12 type-engagement">
-							<h5 class="text-uppercase"><strong>{{$engagement->categorie->designation}}</strong></h5>
+							<h5 class="text-uppercase pull-left">
+								<strong>{{$engagement->categorie->designation}}</strong>
+							</h5>
+							<h5 class="text-uppercase pull-right label label-warning " style="color:white">
+								{{$engagement->secteur->nom}}
+							</h5>
+
 						</div>
 						<div class="col-md-12 intitule-engagement">
 							<p style="font-size:16px">{{$engagement->intitule}}</p>
@@ -128,4 +134,9 @@
 		{{$engagement->engagement_etat}}
 	@endforeach
 	{{ $engagements->links() }}
+
+
 @endsection
+
+  <!-- Bootstrap Core JavaScript -->
+   		<script type="text/javascript" src="js/bootstrap.min.js"></script>

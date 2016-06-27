@@ -1,4 +1,4 @@
-@extends('template-guest')
+@extends('template')
 
 @section('title',$engagement->intitule)
 

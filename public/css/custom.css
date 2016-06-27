@@ -46,6 +46,9 @@ table.dataTable thead > tr > th{
 	font-size:15px;
 	font-weight:bold;
 }
+.titleEngagement{
+	border-bottom:1px solid black;
+}
 
 #tableEngagement>tbody>tr>td{
 	padding-bottom: 0px;
@@ -60,3 +63,4 @@ table.dataTable thead > tr > th{
 	font-weight: bold;
 	text-transform: uppercase;
 }
+

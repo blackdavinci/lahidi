@@ -6,8 +6,22 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Http\Requests\CreateUserRequest;
+
+use App\User;
+
 class UserController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +29,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $active = 'user';
+        $users = User::where('etat',1)->orderBy('updated_at')->get();
+        $nombre_user = count($users);
+        return view('admin.list-users',compact('active','users','nombre_user'));
     }
 
     /**
@@ -34,9 +51,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
+        User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'role' => $request['role'],
+            'password' => bcrypt($request['password']),
+        ]);
     }
 
     /**

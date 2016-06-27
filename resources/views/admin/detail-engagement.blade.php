@@ -17,7 +17,7 @@
 				<a href="" class="btn btn-warning" data-toggle="modal" data-target="#edittModal">Supprimer</a>
 			</h4>
 		</li>
-		<li><h4 class="btn-action-menu"><a href="{{route('engagement.edit',$engagement->id)}}" class="btn btn-danger">Modifier</a></h4></li>
+		<li><h4 class="btn-action-menu"><a href="{{route('engagement.edit',$engagement->id)}}" class="btn btn-danger" id="edit-btn">Modifier</a></h4></li>
 		
 	</ul>
 </div>
@@ -28,8 +28,8 @@
 		<div class="panel panel-default">
 			<div class="panel-body tabs">
 				<ul class="nav nav-tabs">
-					<li class="active"><a href="#fiche" data-toggle="tab">Fiche</a></li>
-					<li><a href="#etats" data-toggle="tab">Etats</a></li>
+					<li class="active"><a href="#fiche" data-toggle="tab" class="text-uppercase"><b>Fiche engagement</b></a></li>
+					<li><a href="#etats" data-toggle="tab" class="text-uppercase"><b>Etats </b> <span class="badge">{{$engagement->etats_count}}</span</a></li>
 				</ul>
 
 				<div class="tab-content">
@@ -86,14 +86,9 @@
 						{!! Form::open(['method' =>'PUT','route' =>['engagement.update',$engagement->id]]) !!}
 							<table class="table table-nobordered table-nobordered-top table-stripe" id="tableEngagement">
 								<tbody>
-									<tr>
-										<td>
-											<span class="infoEngagementHeader label label-info">Informations engagement</span>
-										</td>
-									</tr>
+									
 									<tr><td class="titleEngagement"><h4>Intitulé</h4></td></tr> 
 									<tr><td class="dataEngagement">{{$engagement->intitule}}</td></tr>
-									<tr><td><input type="text"class="form-control" name="intitule" value="{{$engagement->intitule}}"/></td></tr>
 									<tr><td class="titleEngagement"><h4>Description</h4></td></tr> 
 									<tr>
 										<td class="dataEngagement">
@@ -129,8 +124,6 @@
 									<tr><td>{{$engagement->source}}</td></tr>
 									<tr><td class="titleEngagement"><h4>Note</h4></td></tr>
 									 <tr><td class="dataEngagement">{{$engagement->note}}</td></tr>
-
-									<tr><td>{!! Form::submit('Mettre à jour',['class'=>'btn btn-success'])!!}</td></tr>
 								</tbody>
 							</table>
 							{!! Form::close() !!}

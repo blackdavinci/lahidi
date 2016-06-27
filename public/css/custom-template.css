@@ -1,0 +1,65 @@
+/*********** STYLE GLOBAL **********/
+body{
+	padding-top:10px;
+	font-family: 'Open Sans', sans-serif;
+}
+.row{
+	margin-bottom: 5px !important;
+}
+.navbar {
+    margin-bottom:0px;
+}
+
+#frame-top-menu{
+	position: relative; 
+}
+
+#top-menu {
+    position: absolute;
+    bottom: 0;
+    right:0;
+}
+.link-show {
+	writing-mode: vertical-rl;
+    text-orientation: sideways;
+}
+h1,h2,h3,h4,h5{
+	margin-bottom:10px !important;
+	margin-top: 10px !important;
+}
+h5{
+	font-size: 14px !important;
+}
+.label-theme{
+	background:#467da2;
+}
+.ligne-commentaire h4{
+	font-size: 18px !important;
+}
+
+.cadre-engagement-home{
+	/*background-color: #467da2;*/
+	border:1px solid #467da2;
+	color:#467da2;
+	padding-top:8px;
+	border-radius:5px;
+}
+.boxpadding{
+	padding-top:8px;
+}
+.sectionTitle{
+	position:relative;
+	top:-10px;
+	text-align: center;
+}
+.stateInbox{
+	color:white;
+}
+#cadre-article{
+	background:rgb(229,229,229);
+	border-radius:5px;
+	height:350px;
+}
+#cadre-article p{
+	color:white;
+}

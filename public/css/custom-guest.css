@@ -3,7 +3,8 @@
 }
 
 .ligne-engagement{
-	margin-top:10px;
+	margin-bottom:10px !important;
+	padding-left:0px ;
 }
 .bg-engagement{
 	background-color: #44a582;

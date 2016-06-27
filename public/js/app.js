@@ -22,6 +22,18 @@
             
     });
 
+   app.controller('graphController',function() {
+    this.graph = 1;
+
+    this.isSet = function(checkgraph) {
+      return this.graph === checkgraph;
+    };
+
+    this.setTab = function(activegraph) {
+      this.graph = activegraph;  
+    }
+
+   });
   
 
 

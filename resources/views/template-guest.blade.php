@@ -63,13 +63,13 @@
                     <a href="{{route('guest.accueil')}}">Accueil</a>
                 </li>
                 <li class="@if($active=='promesses') active @endif">
-                    <a href="{{route('guest.president')}}">Toutes les promesses</a>
+                    <a href="{{route('guest.promesses')}}">Toutes les promesses</a>
                 </li>
-                <li class="@if($active=='media') active @endif"><a href="{{route('guest.mediatheque')}}">Médiathèque</a></li>
+                <li class="@if($active=='media') active @endif"><a href="{{route('guest.media')}}">Médiathèque</a></li>
                 <li class="@if($active=='langue') active @endif">
                     <a href="{{route('guest.langues')}}">Langues</a>
                 </li>
-                <li class="@if($active=='blog') active @endif"><a href="{{route('guest.forum')}}">Blog</a></li>
+                <li class="@if($active=='blog') active @endif"><a href="{{route('guest.blog')}}">Blog</a></li>
                  <li class="@if($active=='rapports') active @endif"><a href="{{route('guest.rapports')}}">Rapports MOSSEP</a></li>
               </ul>
             </div>
@@ -160,36 +160,33 @@
              );
 
              $('#secteur').highcharts(
-                 {!! json_encode($sourceChart) !!}
+                 {!! json_encode($secteurChart) !!}
              );
 
              $('#etat').highcharts(
-                 {!! json_encode($sourceChart) !!}
+                 {!! json_encode($etatChart) !!}
              );
       })
     });
   </script>
 @endif
    <!-- jQuery -->
-   {!! HTML::script('js/jquery-1.12.3.js') !!}
+   {!! Html::script('js/jquery-1.12.3.js') !!}
    
    <!-- Bootstrap Core JavaScript -->
-   {!! HTML::script('js/bootstrap.min.js') !!}
+   {!! Html::script('js/bootstrap.min.js') !!}
 
    <!-- ChartsJS Javascript -->
-   {!! HTML::script('js/Chart.min.js') !!}
+   {!! Html::script('js/Chart.min.js') !!}
 
    <!-- AngularJS core JavaScript
    ================================================== -->
-   {!! HTML::script('js/angular.min.js') !!}
-   {!! HTML::script('js/app.js') !!}
-   {!! HTML::script('js/bootstrap-datepicker.min.js') !!}
-   {!! HTML::script('js/locales/bootstrap-datepicker.fr.min.js') !!}
+   {!! Html::script('js/angular.min.js') !!}
+   {!! Html::script('js/app.js') !!}
+   {!! Html::script('js/bootstrap-datepicker.min.js') !!}
+   {!! Html::script('js/locales/bootstrap-datepicker.fr.min.js') !!}
    
-   
-   {!! HTML::script('js/easypiechart.js') !!}
-
    <!-- Custom  Javascript Function -->
-   {!! HTML::script('js/custom-function.js') !!}
+   {!! Html::script('js/custom-function.js') !!}
   </body>
 </html>

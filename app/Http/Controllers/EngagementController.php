@@ -22,6 +22,17 @@ use Carbon\Carbon;
 
 class EngagementController extends Controller
 {
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -154,7 +165,7 @@ class EngagementController extends Controller
     public function show($id)
     {
        $active = 'engagement';
-       $engagement = Engagement::with('etats')->findOrFail($id);
+       $engagement = Engagement::withCount('etats')->findOrFail($id);
        // $commentaires =  DB::table('commentaires')
        //                  ->join('engagement_etat', 'commentaires.engagement_etat_id', '=', 'engagement_etat.id')
        //                  ->select('commentaires.*', 'engagement_etat.*')

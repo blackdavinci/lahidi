@@ -6,28 +6,40 @@
 @section('content')
 	<!-- Three columns of text below the carousel -->
 	<div class="row">
-	  <div class="col-lg-4">
+	  <div class="col-lg-5">
 	      <div id="source" ></div>
-	    <h2>Heading</h2>
-	    <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-	    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
 	  </div><!-- /.col-lg-4 -->
-	  <div class="col-lg-4">
-	     <div id="secteur" ></div>
-	    <h2>Heading</h2>
-	    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-	    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+	  <div class="col-lg-7" ng-controller="graphController as graph">
+	    <div id="etat" class="col-md-11" ng-show="graph.isSet(1)"></div>
+	    <div id="secteur" class="col-md-11" ng-show="graph.isSet(2)"></div>
+	    <div class="col-md-1">
+	    	<a class="btn-show-graph text-uppercase" href="" ng-click="graph.setTab(2)" ng-show="graph.isSet(1)">Afficher par secteur</a>
+	    	<a class="btn-show-graph text-uppercase" href="" ng-click="graph.setTab(1)" ng-show="graph.isSet(2)">Afficher par etat</a>
+	    </div>
+
+	  </div> <!-- /.col-lg-4 -->
+	  <div class="col-lg-6">
+	     <div id="secteu" ></div>
 	  </div><!-- /.col-lg-4 -->
-	  <div class="col-lg-4">
-	    <div id="etat" ></div>
-	    <h2>Heading</h2>
-	    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-	    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-	  </div><!-- /.col-lg-4 -->
+	  
 	</div><!-- /.row -->
 
 
 	<!-- START THE FEATURETTES -->
+
+	<hr class="featurette-divider">
+
+	<div class="row featurette">
+	  <div class="col-md-4">
+	  	
+	  </div>
+	  <div class="col-md-4">
+	  	
+	  </div>
+	  <div class="col-md-4">
+	  	
+	  </div>
+	</div>
 
 	<hr class="featurette-divider">
 
@@ -37,7 +49,8 @@
 	    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
 	  </div>
 	  <div class="col-md-5">
-	    <img class="featurette-image img-responsive center-block" data-src="js/500x500/auto" alt="Generic placeholder image">
+	  
+	  
 	  </div>
 	</div>
 

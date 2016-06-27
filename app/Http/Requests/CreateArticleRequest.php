@@ -13,7 +13,7 @@ class CreateArticleRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,21 @@ class CreateArticleRequest extends Request
     public function rules()
     {
         return [
-            //
+            'titre'=>'required',
+            'contenu'=>'required'
+        ];
+    }
+
+     /**
+     * Get the validation rules errors messages.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'titre.required' => 'Titre obligatoire',
+            'contenu.required' => 'Contenu obligatoire',
         ];
     }
 }

@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Be right back.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>LAHIDI.</title>
+        <!-- Bootstrap Core CSS -->
+        {!! Html::style('css/bootstrap.min.css') !!}
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -32,7 +36,7 @@
             }
 
             .title {
-                font-size: 72px;
+                font-size: 25px;
                 margin-bottom: 40px;
             }
         </style>
@@ -40,7 +44,12 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Be right back.</div>
+                <div class="col-md-12">
+                    <img src="images/logo.jpg" width="400" />
+                </div>
+                <div class=" col-md-12 title">
+                    Votre plateforme de suivi et d'évaluation des promesses du Président et de son Gouvernement en ligne très bientôt.
+                </div>
             </div>
         </div>
     </body>

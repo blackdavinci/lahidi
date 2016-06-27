@@ -13,17 +13,18 @@
 
 Route::get('/','HomeController@index');
 
+Route::get('index','GuestController@home');
 Route::get('test','GuestController@test');
 
 // Guest Route
 
 Route::get('accueil',['as'=>'guest.accueil','uses'=>'GuestController@index']);
 
-Route::get('promesses-president',['as'=>'guest.president','uses'=>'GuestController@promesses']);
+Route::get('toutes-les-promesses',['as'=>'guest.promesses','uses'=>'GuestController@promesses']);
 
 Route::get('promesses-gouvernement',['as'=>'guest.gouvernement','uses'=>'GuestController@gouvernement']);
 
-Route::get('mediatheque',['as'=>'guest.mediatheque','uses'=>'GuestController@media']);
+Route::get('mediatheque',['as'=>'guest.media','uses'=>'GuestController@media']);
 
 Route::get('langues',['as'=>'guest.langues','uses'=>'GuestController@langues']);
 
@@ -31,9 +32,13 @@ Route::get('webactu',['as'=>'guest.webactu','uses'=>'GuestController@webactu']);
 
 Route::get('rapports',['as'=>'guest.rapports','uses'=>'GuestController@rapports']);
 
-Route::get('blog',['as'=>'guest.forum','uses'=>'GuestController@blog']);
+Route::get('blog',['as'=>'guest.blog','uses'=>'GuestController@blog']);
 
 Route::get('detail-promesse/{slug}',['as'=>'guest.engagementDetail','uses'=>'GuestController@show']);
+
+Route::get('detail-article/{slug}',['as'=>'guest.article','uses'=>'GuestController@articleShow']);
+
+Route::post('promesses-filtre',['as'=>'guest.promessesfilter','uses'=>'GuestController@promessesFilter']);
 
 
 
@@ -76,6 +81,10 @@ Route::resource('article','ArticleController');
 Route::resource('user','userController');
 
 // Home & Authentification Route 
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
 
 Route::auth();
 
