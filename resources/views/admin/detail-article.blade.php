@@ -82,7 +82,7 @@
 									<tr><td class="dataarticle">{{$article->titre}}</td></tr>
 									<tr><td class="titlearticle"><h4>Description</h4></td></tr> 
 									<tr><td>{{$article->contenu}}</td></tr>
-									<tr><td class="titlearticle"><h4>Localité</h4></td></tr> 
+									<tr><td class="titlearticle"><h4>Type</h4></td></tr> 
 									<tr>
 										<td class="dataarticle">
 											@if($article->localite==null) 

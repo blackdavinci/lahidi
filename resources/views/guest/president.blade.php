@@ -1,6 +1,6 @@
 @extends('template')
 
-@section('title','Promesses du président')
+@section('title','Toutes les promesses')
 
 @section('content')
 	<div class="row">

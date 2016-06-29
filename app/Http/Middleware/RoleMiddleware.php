@@ -3,21 +3,24 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class RoleMiddleware
 {
     /**
-     * Handle an incoming request.
+     * Run the request filter.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     * @param  string  $role
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $role)
     {
-        if ($request->input('role') != 'admin') {
-            return redirect('/logout');
+        if (! $request->user()->hasRole($role)) {
+             return redirect('/logout');
         }
+
         return $next($request);
     }
 }

@@ -32,7 +32,7 @@ class EngagementController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -67,7 +67,10 @@ class EngagementController extends Controller
      */
     public function store(Request $request)
     {
-        Engagement::create($request->all());
+        $engagement = Engagement::create($request->all());
+        $defaultEtat = Etat::select('id')->where('designation','Pas encore tenu')->get();
+        var_dump($defaultEtat);
+        $engagement->etats()->attach($defaultEtat);
         
         return back();
     }
@@ -124,6 +127,7 @@ class EngagementController extends Controller
                                     'date_fin' => $value->fin]);
                     $defaultEtat = Etat::select('id')->where('designation','Pas encore tenu')->get();
                     $engagement->etats()->attach($defaultEtat->id);
+
                     }
                 }
                 if(!empty($insert)){

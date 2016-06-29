@@ -1,10 +1,17 @@
 <div class="row nomargin">
-	<div class="col-md-3">
-		<div class="logo">
-			<a href="{{route('guest.accueil')}}"><img src="images/logo.jpg" alt="" width="60" /></a>
+	<div class="col-md-4">
+		<div class="col-md-3">
+			<div class="logo">
+				<a href="{{route('guest.accueil')}}"><img src="images/logo.jpg" alt="" width="60" /></a>
+			</div>
 		</div>
+		<div class="col-md-9" >
+			<h5><strong>Plateforme de suivi et d'évaluation des promesses du Président et de son Gouvernement</strong></h5>
+		</div>
+
+		
 	</div>
-	<div class="col-md-9" >
+	<div class="col-md-8 text-right" >
 	<div class="navbar navbar-static-top" id="frame-top-menu">
 		<div class="navigation" id="top-menu">
 			<nav>
@@ -22,10 +29,10 @@
 				<a href="{{route('guest.langues')}}">Langues</a>
 				</li>
 				<li class="@if($active=='blog') active @endif" >
-				<a href="{{route('guest.blog')}}">Blog</a>
+				<a href="http://www.ablogui.com">Blog</a>
 				</li>
-				<li class="@if($active=='rapports') active @endif">
-				<a href="{{route('guest.rapports')}}">Rapport MOSSEP </a>
+				<li class="@if($active=='participer') active @endif">
+				<a href="{{route('guest.participer')}}">Participez </a>
 				</li>
 			</ul>
 			</nav>

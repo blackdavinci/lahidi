@@ -25,7 +25,8 @@ class CreateArticleRequest extends Request
     {
         return [
             'titre'=>'required',
-            'contenu'=>'required'
+            'contenu'=>'required',
+            'type'=>'required'
         ];
     }
 
@@ -37,8 +38,10 @@ class CreateArticleRequest extends Request
     public function messages()
     {
         return [
+            'type.required' => 'Type obligatoire',
             'titre.required' => 'Titre obligatoire',
             'contenu.required' => 'Contenu obligatoire',
+
         ];
     }
 }

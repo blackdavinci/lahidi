@@ -1,70 +1,70 @@
-@extends('template-guest')
+@extends('template')
 
-@section('title','Accueil')
+@section('title','Mediathèque')
 
 @section('content')
-	<!-- Three columns of text below the carousel -->
+<div class="col-md-8">
 	<div class="row">
-	  <div class="col-lg-4">
-	    <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-	    <h2>Heading</h2>
-	    <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-	    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-	  </div><!-- /.col-lg-4 -->
-	  <div class="col-lg-4">
-	    <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-	    <h2>Heading</h2>
-	    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-	    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-	  </div><!-- /.col-lg-4 -->
-	  <div class="col-lg-4">
-	    <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-	    <h2>Heading</h2>
-	    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-	    <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-	  </div><!-- /.col-lg-4 -->
-	</div><!-- /.row -->
+		<div class="col-md-12"><h4 ><strong>Vidéos</strong></h4></div>
+		@foreach($videos as $video)
+		<div class="col-md-12">
+			<div class="col-md-5">
+				<div class="12">
+					<div class="embed-responsive embed-responsive-4by3">
+				    	<iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{$video->lien}}"></iframe>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="12"><h5 class="medium-h5"><strong>{{$video->titre}}</strong></h5></div>
+				<p>
+				{{$video->contenu}}
+					Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+				</p>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="solidline"></div>
+				</div>			
+			</div>
+		</div>
 
-
-	<!-- START THE FEATURETTES -->
-
-	<hr class="featurette-divider">
-
-	<div class="row featurette">
-	  <div class="col-md-7">
-	    <h2 class="featurette-heading"><span class="text-muted">It'll blow your mind.</span></h2>
-	    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-	  </div>
-	  <div class="col-md-5">
-	    <img class="featurette-image img-responsive center-block" data-src="js/500x500/auto" alt="Generic placeholder image">
-	  </div>
+		@endforeach
 	</div>
+	<div class="row">
+		<div class="col-md-12"><h4 ><strong>Audios</strong></h4></div>
+		@foreach($audios as $audio)
+			<div class="col-md-4">
+				<div class="col-md-12">
+					<audio controls>
+					  <source src="{{$audio->lien}}" type="audio/mpeg">
+					</audio>
+				</div>
+				<div class=""><h5 class="medium-h5"><strong>{{$audio->titre}}</strong></h5></div>
+			</div>
+		@endforeach
+		<div class="col-md-12">
+			<div class="col-md-4">
+			<iframe width="500" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/269233259&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+			</div>
+			<div class="12"><h5 class="medium-h5"><strong>{{$video->titre}}</strong></h5></div>
 
-	<hr class="featurette-divider">
 
-	<div class="row featurette">
-	  <div class="col-md-7 col-md-push-5">
-	    <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-	    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-	  </div>
-	  <div class="col-md-5 col-md-pull-7">
-	    <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-	  </div>
+		</div>
 	</div>
-
-	<hr class="featurette-divider">
-
-	<div class="row featurette">
-	  <div class="col-md-7">
-	    <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-	    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-	  </div>
-	  <div class="col-md-5">
-	    <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-	  </div>
+</div>
+<div class="col-md-4">
+	<div class=""><h4 ><strong>Derniers articles</strong></h4></div>
+	<div class="col-md-12"  id="cadre-article">
+		@foreach($articles as $article)
+			<div class="col-md-12">
+				<h5 class="text-justify"><strong><a href="{{route('guest.article',$article->slug)}}">{{$article->titre}}</a></strong></h5>
+				<p class="text-justify">
+				{{substr($article->contenu,0,100)}}..
+				<a href="{{route('guest.article',$article->slug)}}" class="pull-right"><strong>Lire plus</strong></a>
+				</p>
+			</div>
+		@endforeach
 	</div>
-
-	<hr class="featurette-divider">
-
-	<!-- /END THE FEATURETTES -->
+</div>
 @endsection

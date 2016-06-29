@@ -156,15 +156,15 @@
       $(function () {
              $('#source').highcharts(
              
-                 {!! json_encode($sourceChart) !!}
+                 {!! json_encode($sourceChart,JSON_UNESCAPED_SLASHES) !!}
              );
 
              $('#secteur').highcharts(
-                 {!! json_encode($secteurChart) !!}
+                 {!! json_encode($secteurChart,JSON_UNESCAPED_SLASHES) !!}
              );
 
              $('#etat').highcharts(
-                 {!! json_encode($etatChart) !!}
+                 {!! json_encode($etatChart,JSON_UNESCAPED_SLASHES) !!}
              );
       })
     });

@@ -40,6 +40,8 @@ Route::get('detail-article/{slug}',['as'=>'guest.article','uses'=>'GuestControll
 
 Route::post('promesses-filtre',['as'=>'guest.promessesfilter','uses'=>'GuestController@promessesFilter']);
 
+Route::get('participer',['as'=>'guest.participer','uses'=>'GuestController@formParticiper']);
+
 
 
 // Dashbord  Route
@@ -48,7 +50,7 @@ Route::get('dashboard',['as'=>'dashboard.index','uses'=>'DashboardController@ind
 
 // Engagement Ressource Route
 
-Route::post('import',['uses'=>'EngagementController@importExcel','as'=>'engagement.importExcel']);
+Route::post('import',['uses'=>'EngagementController@importExcel','as'=>'engagement.importExcel','middleware' => 'role:admin']);
 Route::post('export',['uses'=>'EngagementController@exportExcel','as'=>'engagement.exportExcel']);
 Route::post('addEtat/{id}',['uses'=>'EngagementController@addEtat','as'=>'engagement.etat']);
 Route::put('updateEtat/{id}',['uses'=>'EngagementController@updateEtat','as'=>'engagement.updateEtat']);

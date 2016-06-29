@@ -1,8 +1,7 @@
 /*********** STYLE GLOBAL **********/
 body{
 	padding-top:10px;
-	font-family: 'Open Sans', sans-serif;
-}
+	font-family: 'Open Sans', sans-serif;}
 .row{
 	margin-bottom: 5px !important;
 }
@@ -39,10 +38,13 @@ h5{
 
 .cadre-engagement-home{
 	/*background-color: #467da2;*/
-	border:1px solid #467da2;
+	/*border:1px solid #467da2;*/
 	color:#467da2;
 	padding-top:8px;
 	border-radius:5px;
+	background: url('../images/bg_body.png');
+	padding-bottom: 8px;
+
 }
 .boxpadding{
 	padding-top:8px;
@@ -53,13 +55,18 @@ h5{
 	text-align: center;
 }
 .stateInbox{
-	color:white;
+	color:black;
 }
 #cadre-article{
-	background:rgb(229,229,229);
+	background: url('../images/bg_body.png');
+	background-colo:rgb(229,229,229);
 	border-radius:5px;
 	height:350px;
 }
 #cadre-article p{
 	color:white;
+}
+
+.medium-h5{
+	font-size:15px !important;
 }

@@ -24,24 +24,16 @@ use stdClass;
 class GuestController extends Controller
 {
 
-    
-
-    public function test(){
-      $hello = 'Hello';
-      $sourceChart["credits"] = array("enabled"=>false);
-      $sourceChart["chart"] = array("type" => "bar");
-      $sourceChart["title"] = array("text" => "Fruit Consumption");
-      $sourceChart["xAxis"] = array("categories" => ['Apples', 'Bananas', 'Oranges']);
-      $sourceChart["yAxis"] = array("title" => array("text" => "Fruit eaten"));
-
-      $sourceChart["series"] = [
-          array("name" => "Jane", "data" => [1,0,4]),
-          array("name" => "John", "data" => [5,7,3])
-      ];
-      return view('test',compact('hello','sourceChart'));
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
-
-
+  
 
     public function home(){
       $active = 'home';
@@ -55,21 +47,7 @@ class GuestController extends Controller
     public function index()
     {
         
-        // $linkPreview = new LinkPreview('http://www.youtube.com/watch?v=8ZcmTl_1ER8');
-        // $parsed = $linkPreview->getParsed();
-        // foreach ($parsed as $parserName => $link) {
-        //     echo $parserName . PHP_EOL . PHP_EOL;
-
-        //     echo $link->getUrl() . PHP_EOL;
-        //     echo $link->getRealUrl() . PHP_EOL;
-        //     echo $link->getTitle() . PHP_EOL;
-        //     echo $link->getDescription() . PHP_EOL;
-        //     echo $link->getImage() . PHP_EOL;
-        //     if ($link instanceof VideoLink) {
-        //         echo $link->getEmbedCode() . PHP_EOL;
-        //     }
-        // }
-
+        
         
          $articlesblog = Article::where('etat',1)->where('type','blog')->orderBy('updated_at','desc')->take(3)->get();
         foreach ($articlesblog as $key => $value) {
@@ -94,7 +72,7 @@ class GuestController extends Controller
       $etats = Etat::withCount('engagements')->where('etat',1)->get();
 
       foreach ($etats as $key => $value) {
-        $data_etats[]= ["name"=>$value->designation,"y"=>$value->engagements_count,"url"=>"'http://bing.com/search?q=foo'"];
+        $data_etats[]= ["name"=>$value->designation,"y"=>$value->engagements_count,"url"=>"http://bing.com/search?q=foo"];
 
       }
 
@@ -105,12 +83,15 @@ class GuestController extends Controller
       $etatChart["title"] = ["text" => "","verticalAlign"=>"bottom"];
       // $etatChart["subtitle"] = ["text" => "Cliquez sur la colonne pour plus de détails"];
       $etatChart["xAxis"] = ["type"=>"category"];
-      $etatChart["yAxis"] = ["title"=>["text"=>"Nombre de promesses"]];
-      $etatChart['plotOptions']['pie'] = ["allowPointSelect"=>true];
-      $etatChart['plotOptions']['series']['cursor'] = "pointer";
-      $etatChart['plotOptions']['series']['point']['events']['click'] = "function(){ location.href = this.options.url;}";
+      // $fn = 'function(){ location.href = this.options.url;}';
+      // $etatChart['plotOptions']['series']= ['cursor'=>'pointer','point'=>['events'=>['click'=>function(){ location.href = this.options.url;}]]];
+      // $etatChart['plotOptions']['series']['point']['events']['click'] = "function(){ location.href = this.options.url;}";
+
        
       $etatChart["series"] =[["name"=>"Nombre de promesse","colorByPoint"=>true,"data"=>$data_etats]];
+
+      // dd(json_encode($etatChart,JSON_UNESCAPED_SLASHES));
+      // dd();
 
 
     /************************************ Chart Secteur ****************************************/
@@ -200,11 +181,18 @@ class GuestController extends Controller
     
     	$active = 'home';
 
-      $engagements = Engagement::where('etat',1)->orderBy('updated_at')->take(4)->get();
-      $articlesLahidi = Article::where('etat',1)->where('type','lahidi')->orderBy('updated_at','desc')->take(3)->get();
+      $engagements = Engagement::where('etat',1)->orderBy('updated_at','desc')->take(4)->get();
+      $nbre_engagements = Engagement::where('etat',1)->count();
      
+      $articles = Article::where('etat',1)->where('type','article')->orderBy('updated_at','desc')
+                                        ->take(3)->get();
+      $blogs = Article::where('etat',1)->where('type','blog')->orderBy('updated_at','desc')->take(3)->get();
+      $videos = Article::where('etat',1)->where('type','video')->orderBy('updated_at','desc')->take(3)->get();
+      $audios = Article::where('etat',1)->where('type','audio')->orderBy('updated_at','desc')->take(3)->get();
+      $docs = Article::where('etat',1)->where('type','doc')->orderBy('updated_at','desc')->take(3)->get();
 
-        return view('guest.accueil',compact('active','sourceChart','secteurChart','etatChart','articlesLahidi','engagements','articlesblog'));
+
+        return view('guest.accueil',compact('active','sourceChart','secteurChart','etatChart','articles','engagements','blogs','videos','docs','audios','nbre_engagements'));
     }
 
     /**
@@ -254,7 +242,7 @@ class GuestController extends Controller
                                      ->where('etat',1)->where($clauses)->orderBy('updated_at','desc')->paginate(15);
 
       if(!empty($request->input('etat'))) {
-        var_dump('etat_id');
+        
       }
       $categories = Categorie::with('engagements')->where('type','president')->get();
       $secteurs = Secteur::where('etat',1)->get();
@@ -293,18 +281,18 @@ class GuestController extends Controller
        $active = 'blog';
        $article = Article::where('etat',1)->where('slug',$slug)->first();
 
-       return view('guest.detail',compact('active','article','slug'));
+       return view('guest.article',compact('active','article','slug'));
     }
     /**
-     * Gouvernement function.
+     * Formulaire participation
+      function.
      *
      * @return \Illuminate\Http\Response
      */
-    public function gouvernement()
+    public function formParticiper()
     {
-    	$engagements = Engagement::with('etats',['categories' => function ($query) {
-    					$query->where('type', '=', 'gouvernement');}])->where('etat',1)->get();
-        return view('guest.gouvernement',compact('engagements'));
+    	 $active = 'participer';
+        return view('guest.participer',compact('active'));
     }
 
     /**
@@ -315,7 +303,11 @@ class GuestController extends Controller
     public function media()
     {
     		$active = 'media';
-        return view('guest.mediatheque',compact('active'));
+        $videos = Article::where('etat',1)->where('type','video')->get();
+        $audios = Article::where('etat',1)->where('type','audio')->get();
+        $articles = Article::where('etat',1)->where('type','article')->orderBy('updated_at','desc');
+        
+        return view('guest.mediatheque',compact('active','videos','audios','articles'));
     }
 
     /**

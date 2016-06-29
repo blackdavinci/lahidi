@@ -21,7 +21,8 @@
 		<!-- Modal de d'ajout d'engagement -->
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
-		  {!! Form::open(['method' =>'POST','route' =>['article.store'],'files'=>true]) !!}
+		 <form class="" role="form" method="POST" action="{{route('article.store')}}" files="ture">
+		                {{ csrf_field() }}
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -32,34 +33,34 @@
 		      	<div class="col-md-12">
 			      	<div class="form-group">
 			      	<div class="form-group">
+			      	  <label for="titre">Type</label>
+			      	 <select class="form-control" name="type" ng-model="type">
+			      	 	<option value="article">Article</option>
+			      	 	<option value="audio" >Audio</option>
+			      	 	<option value="blog">Blog</option>
+			      	 	<option value="doc" >Rapport</option>
+			      	 	<option value="video" >Vidéo</option>
+			      	 </select>
+			      	</div>
+			      	<div class="form-group">
 			      	  <label for="titre">Titre</label>
 			      	 <input type="text" class="form-control" id="titre" placeholder="Titre de l'article" name="titre">
 			      	</div>
+			      	
 			      	<div class="form-group">
-			      	  <label for="titre">Type</label>
-			      	 <select class="form-control" name="type" ng-model="type">
-			      	 	<option value="lahidi">Lahidi</option>
-			      	 	<option value="blog">Blog</option>
-			      	 	<option value="media" >Média</option>
-			      	 </select>
-			      	</div>
-			      	<div class="form-group" ng-show="type== 'lahidi' || type=='media'">
 			      	  <label for="note">Contenu</label>
 			      	  <textarea name="contenu" class="form-control" id="contenu"></textarea> 
 			      	</div>
-			      	<div class="form-group" ng-show="type== 'blog'">
+			      	<div class="form-group" ng-show="type='article' || type='audio' || type='video' || type='blog'">
 			      		<label for="lien">Lien URL</label>
 			      	<input type="text" id="lien" name="lien" class="form-control" placeholder="Lien URL relatif à l'article">
 			      	</div>
-			      	<div class="form-group" ng-show="type== 'lahidi' || type=='media'">
+			      	<div class="form-group" ng-show="type== 'article'">
 			      		<label for="image">Image</label>
 			      		<input type="file" id="image" name="image" class="form-control">
 			      	</div>
-			      	<div class="form-group" ng-show="type== 'lahidi' || type=='media'">
-			      		<label for="video">Vidéo</label>
-			      		<input type="file" id="video" name="vid" class="form-control">
-			      	</div>
-			      	<div class="form-group" ng-show="type== 'lahidi' || type=='media'">
+			      	
+			      	<div class="form-group" ng-show="type== 'doc'">
 			      		<label for="image">Document</label>
 			      		<input type="file" id="doc" name="doc" class="form-control">
 			      	</div>

@@ -17,16 +17,16 @@
 	{!! Html::style('css/custom-guest.css') !!}
 
 	<!-- Eterna CSS -->
-    <link href="css/eterna/bootstrap.cs" rel="stylesheet" />
-    <link href="css/eterna/bootstrap-responsive.cs" rel="stylesheet" />
-	<link href="css/eterna/flexslider.css" rel="stylesheet" />
-	<link href="css/eterna/prettyPhoto.css" rel="stylesheet" />
-	<link href="css/eterna/camera.css" rel="stylesheet" />
-	<link href="css/eterna/jquery.bxslider.css" rel="stylesheet" />
-	<link href="css/eterna/style.css" rel="stylesheet" />
+    {!! Html::style("css/eterna/bootstrap.cs") !!}
+    {!! Html::style("css/eterna/bootstrap-responsive.css") !!}
+	{!! Html::style("css/eterna/flexslider.css") !!}
+	{!! Html::style("css/eterna/prettyPhoto.css") !!}
+	{!! Html::style("css/eterna/camera.css") !!}
+	{!! Html::style("css/eterna/jquery.bxslider.css") !!}
+	{!! Html::style("css/eterna/style.css") !!}
 
 	<!-- Theme skin -->
-	<link href="css/eterna/color/default.css" rel="stylesheet" />
+	{!! Html::style("css/eterna/color/default.css") !!}
 	
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -37,10 +37,10 @@
 	{!! Html::style('css/font-awesome.css') !!}
 
 	<!-- Charts JS -->
-	<script src="js/eterna/jquery.js"></script>
-	<script src="http://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/data.js"></script>
-	<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+	{!! Html::script("js/eterna/jquery.js") !!}
+	{!! Html::script("http://code.highcharts.com/highcharts.js") !!}
+	{!! Html::script("https://code.highcharts.com/modules/data.js") !!}
+	{!! Html::script("https://code.highcharts.com/modules/drilldown.js") !!}
     
 </head>
 
@@ -96,17 +96,16 @@
   <script type="text/javascript">
     jQuery(document).ready(function($) {
       $(function () {
-             $('#source').highcharts(
              
-                 {!! json_encode($sourceChart) !!}
-             );
 
              $('#secteur').highcharts(
-                 {!! json_encode($secteurChart) !!}
+                 {!! json_encode($secteurChart,JSON_UNESCAPED_SLASHES) !!}
              );
 
              $('#etat').highcharts(
-                 {!! json_encode($etatChart) !!}
+             	
+                 {!! json_encode($etatChart,JSON_UNESCAPED_SLASHES) !!}
+                 
              );
       });
     });
@@ -116,40 +115,40 @@
     <!-- javascript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="js/eterna/jquery.js"></script>
-    	<script src="js/eterna/jquery.easing.1.3.js"></script>
+        {!! Html::script("js/eterna/jquery.js") !!}
+    	{!! Html::script("js/eterna/jquery.easing.1.3.js") !!}
     	 	
-    	<script src="js/eterna/modernizr.custom.js"></script>
-    	<script src="js/eterna/toucheffects.js"></script>
-    	<script src="js/eterna/google-code-prettify/prettify.js"></script>	
-    	<script src="js/eterna/jquery.bxslider.min.js"></script> 
-    	<script src="js/eterna/camera/camera.js"></script>
-    	<script src="js/eterna/camera/setting.js"></script>
+    	{!! Html::script("js/eterna/modernizr.custom.js") !!}
+    	{!! Html::script("js/eterna/toucheffects.js") !!}
+    	{!! Html::script("js/eterna/google-code-prettify/prettify.js") !!}	
+    	{!! Html::script("js/eterna/jquery.bxslider.min.js") !!} 
+    	{!! Html::script("js/eterna/camera/camera.js") !!}
+    	{!! Html::script("js/eterna/camera/setting.js") !!}
     	
-    	<script src="js/eterna/jquery.prettyPhoto.js"></script>
-    	<script src="js/eterna/portfolio/jquery.quicksand.js"></script> 
-    	<script src="js/eterna/portfolio/setting.js"></script> 	
-    	<script src="js/eterna/jquery.tweet.js"></script> 
+    	{!! Html::script("js/eterna/jquery.prettyPhoto.js") !!}
+    	{!! Html::script("js/eterna/portfolio/jquery.quicksand.js") !!} 
+    	{!! Html::script("js/eterna/portfolio/setting.js") !!} 	
+    	{!! Html::script("js/eterna/jquery.tweet.js") !!} 
 
     	<!-- Bootstrap Core JavaScript -->
-    	<script type="text/javascript" src="js/jquery-1.12.3.js"></script>
-   		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+    	{!! Html::script("js/jquery-1.12.3.js") !!}
+   		{!! Html::script("js/bootstrap.min.js") !!}
 
     	<!-- AngularJS core JavaScript
 		================================================== -->
-		<script type="text/javascript" src="js/angular.min.js"></script>
-		<script type="text/javascript" src="js/app.js"></script>
+		{!! Html::script("js/angular.min.js") !!}
+		{!! Html::script("js/app.js") !!}
 		
 
-    	<script src="js/eterna/jquery.flexslider.js"></script> 
-    	<script src="js/eterna/animate.js"></script>
-    	<script src="js/eterna/inview.js"></script>
-    	<script src="js/eterna/custom.js"></script>
+    	{!! Html::script("js/eterna/jquery.flexslider.js") !!} 
+    	{!! Html::script("js/eterna/animate.js") !!}
+    	{!! Html::script("js/eterna/inview.js") !!}
+    	{!! Html::script("js/eterna/custom.js") !!}
 	
 
-    	<script src="js/eterna/jquery.cookie.js"></script>
-    	<script src="colorpicker/js/colorpicker.js"></script>
-    	<script src="js/eterna/optionspanel.js"></script>
+    	{!! Html::script("js/eterna/jquery.cookie.js") !!}
+    	{!! Html::script("colorpicker/js/colorpicker.js") !!}
+    	{!! Html::script("js/eterna/optionspanel.js") !!}
    	
    		
    		

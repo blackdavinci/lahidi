@@ -17,7 +17,7 @@
 
 @section('content')
 	<div class="col-md-12">
-
+		@include('errors.required-errors')
 		<!-- Modal de d'ajout d'engagement -->
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
