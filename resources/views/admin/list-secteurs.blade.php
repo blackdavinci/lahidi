@@ -21,7 +21,7 @@
 		<!-- Modal de d'ajout d'engagement -->
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
-		  {!! Form::open(['method' =>'POST','route' =>['secteur.store']]) !!}
+		  {!! Form::open(['method' =>'POST','route' =>['pw-admin-secteur.store']]) !!}
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -106,7 +106,7 @@
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
 						        <div class="pull-right" style="margin-left:5px;">
-							        {!! Form::open(['method' =>'delete','route' =>['secteur.destroy',$secteur->id]]) !!}
+							        {!! Form::open(['method' =>'delete','route' =>['pw-admin-secteur.destroy',$secteur->id]]) !!}
 							        	<input type="hidden" name="action" value='suppression'/>
 							        	{!! Form::submit('Supprimer',['class'=>'btn btn-danger'])!!}
 							      	{!! Form::close() !!}
@@ -119,7 +119,7 @@
 						<!-- Modal de modification d'appréciation -->
 						<div class="modal fade" id="editModal{{$secteur->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						  <div class="modal-dialog">
-						  {!! Form::open(['method' =>'PUT','route' =>['secteur.update',$secteur->id]]) !!}
+						  {!! Form::open(['method' =>'PUT','route' =>['pw-admin-secteur.update',$secteur->id]]) !!}
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

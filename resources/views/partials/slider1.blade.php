@@ -3,13 +3,14 @@
 	<div class="camera_wrap" id="camera-slide">
 	
 		<!-- slide 1 here -->
-		<div  data-src="images/slides/1.jpg" width="150">
+		<div  data-src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" >
 			<div class="camera_caption fadeFromLeft">
-				<div class="container">
+				<div class="container-fluid">
+				<div class="col-md-12 slide-post">
+					<img src="images/slides/1.jpg" alt="" width="" />
+				</div>
 					<div class="row">                                
-						<div class="col-md-6">
-							
-						</div>
+						
 					</div>  
 				</div>                                                                                         
 			</div>

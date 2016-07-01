@@ -22,7 +22,8 @@
         "maatwebsite/excel": "~2.1.0",
         "dusterio/link-preview": "~1.2",
         "kasp3r/link-preview": "dev-master",
-        "cviebrock/eloquent-sluggable":"^4.0.2"
+        "cviebrock/eloquent-sluggable":"^4.0.2",
+        "thujohn/twitter": "~2.0"
     },
     "autoload": {
         "classmap": [

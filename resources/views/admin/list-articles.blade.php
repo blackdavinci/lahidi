@@ -21,8 +21,8 @@
 		<!-- Modal de d'ajout d'engagement -->
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
-		 <form class="" role="form" method="POST" action="{{route('article.store')}}" files="ture">
-		                {{ csrf_field() }}
+		  {!! Form::open(['method' =>'POST','route' =>['pw-admin-article.store'], 'files' => true]) !!}
+
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -51,7 +51,7 @@
 			      	  <label for="note">Contenu</label>
 			      	  <textarea name="contenu" class="form-control" id="contenu"></textarea> 
 			      	</div>
-			      	<div class="form-group" ng-show="type='article' || type='audio' || type='video' || type='blog'">
+			      	<div class="form-group" ng-show="type=='audio' || type=='video' || type=='blog'">
 			      		<label for="lien">Lien URL</label>
 			      	<input type="text" id="lien" name="lien" class="form-control" placeholder="Lien URL relatif à l'article">
 			      	</div>
@@ -87,6 +87,7 @@
 									<th>
 										<input  type="checkbox" name="layout" id="1" value="option" ng-model="allselect">
 									</th>
+									<th>Type</th>
 									<th>Titre</th>
 									<th>Contenu</th>
 									<th>Lien</th>
@@ -100,8 +101,10 @@
 									<td>
 										<input  type="checkbox" name="layout" id="1" value=""  ng-checked="allselect">
 									</td>
+									<td><span class="text-uppercase"> <b>{{$article->type}}</b></span></td>
+
 									<td data-search="{{$article->titre}}">
-										<a href="{{route('article.show',$article->id)}}">{{$article->titre}}</a>
+										<a href="{{route('pw-admin-article.show',$article->id)}}">{{$article->titre}}</a>
 									</td>
 									<td>{{substr($article->contenu,0,30)}}..</td>
 									<td> @if($article->lien==null)
@@ -133,7 +136,7 @@
 								      <div class="modal-footer">
 								        <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
 								        <div class="pull-right" style="margin-left:5px;">
-									        {!! Form::open(['method' =>'delete','route' =>['article.destroy',$article->id]]) !!}
+									        {!! Form::open(['method' =>'delete','route' =>['pw-admin-article.destroy',$article->id]]) !!}
 									        	<input type="hidden" name="action" value='suppression'/>
 									        	{!! Form::submit('Supprimer',['class'=>'btn btn-danger'])!!}
 									      	{!! Form::close() !!}
@@ -146,7 +149,7 @@
 								<!-- Modal de modification d'appréciation -->
 								<div class="modal fade" id="editModal{{$article->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								  <div class="modal-dialog">
-								  {!! Form::open(['method' =>'PUT','route' =>['article.update',$article->id]]) !!}
+								  {!! Form::open(['method' =>'PUT','route' =>['pw-admin-article.update',$article->id]]) !!}
 								    <div class="modal-content">
 								      <div class="modal-header">
 								        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

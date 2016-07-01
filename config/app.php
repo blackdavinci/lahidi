@@ -165,6 +165,7 @@ return [
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         'Laracasts\Utilities\JavaScript\JavaScriptServiceProvider',
         'Dusterio\LinkPreview\Integrations\LaravelServiceProvider',
+        'Thujohn\Twitter\TwitterServiceProvider',
 
     ],
 
@@ -220,6 +221,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Preview' => 'Dusterio\LinkPreview\Integrations\LaravelFacade',
+        'Twitter' => 'Thujohn\Twitter\Facades\Twitter',
 
     ],
 

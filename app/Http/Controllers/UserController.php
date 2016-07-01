@@ -59,6 +59,7 @@ class UserController extends Controller
             'role' => $request['role'],
             'password' => bcrypt($request['password']),
         ]);
+        return back();
     }
 
     /**

@@ -28,7 +28,7 @@
 					<!-- Modal de modification d'article -->
 					    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					      <div class="modal-dialog">
-					      {!! Form::open(['method' =>'POST','route' =>['article.update',$article->id],'files'=>true]) !!}
+					      {!! Form::open(['method' =>'POST','route' =>['pw-admin-article.update',$article->id],'files'=>true]) !!}
 					        <div class="modal-content">
 					          <div class="modal-header">
 					            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -75,7 +75,7 @@
 						<!-- Tableau d'information de l'article -->
 						<div class="col-md-12">
 						<div class="table-responsive">
-						{!! Form::open(['method' =>'PUT','route' =>['article.update',$article->id]]) !!}
+						{!! Form::open(['method' =>'PUT','route' =>['pw-admin-article.update',$article->id]]) !!}
 							<table class="table table-nobordered table-nobordered-top table-stripe" id="tablearticle">
 								<tbody>
 									<tr><td class="titlearticle"><h4>Titre</h4></td></tr> 

@@ -77,25 +77,25 @@
 		</form>
 		<ul class="nav menu">
 			<li class="@if($active=='dashboard') active @endif">
-				<a href="{{route('dashboard.index')}}"><i class="fa fa-tachometer" aria-hidden="true"></i> Tableau de bord</a>
+				<a href="{{route('pw-admin-dashboard.index')}}"><i class="fa fa-tachometer" aria-hidden="true"></i> Tableau de bord</a>
 			</li>
 			<li class="@if($active=='engagement') active @endif">
-				<a href="{{route('engagement.index')}}"><i class="fa fa-reorder" aria-hidden="true"></i> Engagements</a>
+				<a href="{{route('pw-admin-engagement.index')}}"><i class="fa fa-reorder" aria-hidden="true"></i> Engagements</a>
 			</li>
 			<li class="@if($active=='categorie') active @endif">
-				<a href="{{route('categorie.index')}}"><i class="fa fa-tasks" aria-hidden="true"></i> Catégories</a>
+				<a href="{{route('pw-admin-categorie.index')}}"><i class="fa fa-tasks" aria-hidden="true"></i> Catégories</a>
 			</li>
 			<li class="@if($active=='secteur') active @endif">
-				<a href="{{route('secteur.index')}}"><i class="fa fa-pie-chart" aria-hidden="true"></i> Secteurs</a>
+				<a href="{{route('pw-admin-secteur.index')}}"><i class="fa fa-pie-chart" aria-hidden="true"></i> Secteurs</a>
 			</li>
 			<li class="@if($active=='etat') active @endif">
-				<a href="{{route('etat.index')}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Etats</a>
+				<a href="{{route('pw-admin-etat.index')}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Etats</a>
 			</li>
 			<li class="@if($active=='artcile') active @endif">
-				<a href="{{route('article.index')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Articles</a>
+				<a href="{{route('pw-admin-article.index')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Articles</a>
 			</li>
 			<li class="@if($active=='user') active @endif">
-				<a href="{{route('user.index')}}"><i class="fa fa-users" aria-hidden="true"></i> Utilisateurs</a>
+				<a href="{{route('pw-admin-user.index')}}"><i class="fa fa-users" aria-hidden="true"></i> Utilisateurs</a>
 			</li>
 		</ul>
 

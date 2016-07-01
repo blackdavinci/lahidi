@@ -5,14 +5,14 @@
 @section('content')
 	<div class="row">
 		<div class="col-md-12">
-			<h2>Toutes les promesses \<small>  </small></h2>
+			<h2>Toutes les promesses <small>  </small></h2>
 		</div>
-		<div class="col-md-12">
-			 {!! Form::open(['method' =>'POST','route' =>['guest.promessesfilter']]) !!}
+		{{-- <div class="col-md-12">
+			 {!! Form::open(['method' =>'GET','route' =>['guest.promesssefilter']]) !!}
 			  <div class="form-group col-md-2">
 			    <label class="sr-only" for="exampleInputEmail3">Catégorie</label>
 			    <select name="categorie" id="categorie" class="form-control" >
-			    	<option value="">Aucun</option>
+			    	<option value="">Source</option>
 			    	@foreach($categorie as $categorie)
 			    		<option value="{{$categorie->id}}">{{$categorie->designation}}</option>
 			    	@endforeach
@@ -21,7 +21,7 @@
 			  <div class="form-group col-md-5">
 			    <label class="sr-only" for="exampleInputPassword3">Secteur</label>
 			    <select name="secteur" id="secteur" class="form-control" >
-			    	<option value="">Aucun</option>
+			    	<option value="">Secteur</option>
 			    	@foreach($secteurs as $secteur)
 			   			<option value="{{$secteur->id}}">{{$secteur->nom}}</option>
 			   		@endforeach
@@ -30,7 +30,7 @@
 			  <div class="form-group col-md-3">
 			   <label class="sr-only" for="exampleInputPassword3">Etat</label>
 			   <select name="etat" id="etat" class="form-control" >
-			   	<option value="">Aucun</option>
+			   	<option value="">Verdict</option>
 			   	@foreach($etats as $etat)
 			   		<option value="{{$etat->id}}">{{$etat->designation}}</option>
 			   	@endforeach
@@ -39,7 +39,7 @@
 			
 			  <button type="submit" class="btn btn-default text-uppercase">Valider</button>
 			 {!! Form::close() !!}
-		</div>
+		</div> --}}
 		<p>&nbsp;</p>
 		<div class="col-md-12">
 			
@@ -51,6 +51,7 @@
 					<a data-toggle="collapse" href="#comment{{$engagement->id}}" aria-expanded="false" aria-controls="collapseExample">
 					<div class="col-md-8 cadre-engagement-home">
 					<div class="col-md-12 ">
+					<div class="row">
 						<div class="col-md-12 type-engagement">
 							<h5 class="text-uppercase pull-left">
 								<strong>{{$engagement->categorie->designation}}</strong>
@@ -60,12 +61,17 @@
 							</h5>
 
 						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-12 intitule-engagement">
 							<p style="font-size:16px">{{$engagement->intitule}}</p>
 						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-12">
 							<h5><span class="text-uppercase"><strong>Source :</strong></span> {{$engagement->source}}</h5>
 						</div>
+					</div>
 					</div>
 					</div>
 					</a>

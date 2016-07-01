@@ -69,7 +69,6 @@ class EngagementController extends Controller
     {
         $engagement = Engagement::create($request->all());
         $defaultEtat = Etat::select('id')->where('designation','Pas encore tenu')->get();
-        var_dump($defaultEtat);
         $engagement->etats()->attach($defaultEtat);
         
         return back();
@@ -84,60 +83,32 @@ class EngagementController extends Controller
     public function importExcel(Request $request)
     {
         
-       
         if(Input::hasFile('import_file')){
-            $path = Input::file('import_file')->getRealPath();
-            // Format the dates
-            
-            $data = Excel::load($path, function($reader) {
-                $reader->formatDates(true);
-                $reader->setDateColumns(array(
-                    'created_at',
-                    'update_at'
-                ))->get();
-            })->get();
-
-            if(!empty($data) && $data->count()){
-                foreach ($data as $key => $value) {   
-                    if(!empty($value->intitule)) {                
-                        $insert[] = ['intitule' => $value->intitule, 'description' => $value->description,
-                                    'secteur_id' => $value->secteur,
-                                    'categorie_id' => $value->categorie,
-                                    'source' => $value->source,
-                                    'note' => $value->note,
-                                    'localite' => $value->localite,
-                                    'prefecture' => $value->prefecture,
-                                    'sous_prefecture' => $value->sous_prefecture,
-                                    'district' => $value->district,
-                                    'date_debut' => $value->debut,
-                                    'date_fin' => $value->fin,
-                                    'created_at' => Carbon::now() ,
-                                    'updated_at' => Carbon::now()];
-        
-                    $engagement = Engagement::create(['intitule' => $value->intitule, 'description' => $value->description,
-                                    'secteur_id' => $value->secteur,
-                                    'categorie_id' => $value->categorie,
-                                    'source' => $value->source,
-                                    'note' => $value->note,
-                                    'localite' => $value->localite,
-                                    'prefecture' => $value->prefecture,
-                                    'sous_prefecture' => $value->sous_prefecture,
-                                    'district' => $value->district,
-                                    'date_debut' => $value->debut,
-                                    'date_fin' => $value->fin]);
-                    $defaultEtat = Etat::select('id')->where('designation','Pas encore tenu')->get();
-                    $engagement->etats()->attach($defaultEtat->id);
-
+                    $path = Input::file('import_file')->getRealPath();
+                    $data = Excel::load($path, function($reader) {
+                    })->get();
+                    if(!empty($data) && $data->count()){
+                        foreach ($data as $key => $value) {
+                            if(!empty($value->intitule)){
+                                $engagement = Engagement::create(['intitule' => $value->intitule, 
+                                                'description' => $value->description,
+                                                'secteur_id' => $value->secteur,
+                                                'categorie_id' => $value->categorie,
+                                                'source' => $value->source,
+                                                'note' => $value->note,
+                                                'localite' => $value->localite,
+                                                'prefecture' => $value->prefecture,
+                                                'sous_prefecture' => $value->sous_prefecture,
+                                                'district' => $value->district,
+                                                'date_debut' => $value->debut,
+                                                'date_fin' => $value->fin]);
+                                $defaultEtat = Etat::select('id')->where('designation','Pas encore tenu')->get();
+                                $engagement->etats()->attach($defaultEtat);
+                            }
+                        }
+                        
                     }
                 }
-                if(!empty($insert)){
-                    
-                  
-                    // DB::table('engagements')->insert($insert);
-                    
-                }
-            }
-        }
         return back();
     }
 

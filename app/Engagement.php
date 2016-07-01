@@ -17,8 +17,8 @@ class Engagement extends Model
      */
     public $timestamps = true;
     
-     protected $fillable = ['intitule','description','etat','source','note','localite','prefecture','sous_prefecture',
-                    'district','date_debut','date_fin','valider','secteur_id','categorie_id','user_id','slug'];
+     protected $fillable = ['intitule','description','etat','source','note','localite','prefecture',
+     'sous_prefecture','district','date_debut','date_fin','valider','secteur_id','categorie_id','user_id','slug'];
 
      /**
           * Return the sluggable configuration array for this model.

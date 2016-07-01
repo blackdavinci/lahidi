@@ -29,7 +29,7 @@
 		      <div class="modal-body">
 		      <div class="row">
 		      	<div class="col-md-12">
-		      		<form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+		      		<form class="form-horizontal" role="form" method="POST" action="{{route('pw-admin-user.store')}}">
 		      		    {{ csrf_field() }}
 
 		      		    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -187,7 +187,7 @@
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
 						        <div class="pull-right" style="margin-left:5px;">
-							        {!! Form::open(['method' =>'delete','route' =>['user.destroy',$user->id]]) !!}
+							        {!! Form::open(['method' =>'delete','route' =>['pw-admin-user.destroy',$user->id]]) !!}
 							        	<input type="hidden" name="action" value='suppression'/>
 							        	{!! Form::submit('Supprimer',['class'=>'btn btn-danger'])!!}
 							      	{!! Form::close() !!}

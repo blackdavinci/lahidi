@@ -38,7 +38,9 @@ Route::get('detail-promesse/{slug}',['as'=>'guest.engagementDetail','uses'=>'Gue
 
 Route::get('detail-article/{slug}',['as'=>'guest.article','uses'=>'GuestController@articleShow']);
 
-Route::post('promesses-filtre',['as'=>'guest.promessesfilter','uses'=>'GuestController@promessesFilter']);
+// Route::post('promesses-filtre',['as'=>'guest.promessesfilter','uses'=>'GuestController@promessesFilter']);
+
+Route::get('promesses-filtre',['as'=>'guest.promesssefilter','uses'=>'GuestController@promessesFilter']);
 
 Route::get('participer',['as'=>'guest.participer','uses'=>'GuestController@formParticiper']);
 
@@ -46,41 +48,41 @@ Route::get('participer',['as'=>'guest.participer','uses'=>'GuestController@formP
 
 // Dashbord  Route
 
-Route::get('dashboard',['as'=>'dashboard.index','uses'=>'DashboardController@index']);
+Route::get('pw-admin-dashboard',['as'=>'pw-admin-dashboard.index','uses'=>'DashboardController@index']);
 
 // Engagement Ressource Route
 
-Route::post('import',['uses'=>'EngagementController@importExcel','as'=>'engagement.importExcel','middleware' => 'role:admin']);
-Route::post('export',['uses'=>'EngagementController@exportExcel','as'=>'engagement.exportExcel']);
-Route::post('addEtat/{id}',['uses'=>'EngagementController@addEtat','as'=>'engagement.etat']);
-Route::put('updateEtat/{id}',['uses'=>'EngagementController@updateEtat','as'=>'engagement.updateEtat']);
-Route::delete('delteEtat/{id}',['uses'=>'EngagementController@deleteEtat','as'=>'engagement.deleteeEtat']);
+Route::post('import',['uses'=>'EngagementController@importExcel','as'=>'pw-admin-engagement.importExcel']);
+Route::post('export',['uses'=>'EngagementController@exportExcel','as'=>'pw-admin-engagement.exportExcel']);
+Route::post('addEtat/{id}',['uses'=>'EngagementController@addEtat','as'=>'pw-admin-engagement.etat']);
+Route::put('updateEtat/{id}',['uses'=>'EngagementController@updateEtat','as'=>'pw-admin-engagement.updateEtat']);
+Route::delete('delteEtat/{id}',['uses'=>'EngagementController@deleteEtat','as'=>'pw-admin-engagement.deleteeEtat']);
 
-Route::resource('engagement','EngagementController');
+Route::resource('pw-admin-engagement','EngagementController');
 
 // Catégroie Ressource Route
 
-Route::resource('categorie','CategorieController');
+Route::resource('pw-admin-categorie','CategorieController');
 
 // Secteur Ressource Route
 
-Route::resource('secteur','SecteurController');
+Route::resource('pw-admin-secteur','SecteurController');
 
 // Etat Ressource Route
 
-Route::resource('etat','EtatController');
+Route::resource('pw-admin-etat','EtatController');
 
 // Commentaire Ressource Route
 
-Route::resource('commentaire','CommentaireController');
+Route::resource('pw-admin-commentaire','CommentaireController');
 
 // Article Ressource Route
 
-Route::resource('article','ArticleController');
+Route::resource('pw-admin-article','ArticleController');
 
 // Utilisateur Ressource Route
 
-Route::resource('user','userController');
+Route::resource('pw-admin-user','UserController');
 
 // Home & Authentification Route 
 
@@ -88,6 +90,4 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::auth();
 
-Route::get('/home', 'HomeController@index');

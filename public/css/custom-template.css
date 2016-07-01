@@ -57,16 +57,28 @@ h5{
 .stateInbox{
 	color:black;
 }
-#cadre-article{
-	background: url('../images/bg_body.png');
-	background-colo:rgb(229,229,229);
-	border-radius:5px;
-	height:350px;
+#cadre-tweet{
+	
 }
-#cadre-article p{
-	color:white;
+#ligne-tweet{
+	/*background: url('../images/bg_body.png');*/
+	/*background-color:#ffffff;*/
+	border:1px solid #467da2;
+	border-radius:5px;
+	
+}
+#cadre-rapport{
+	border:1px solid #467da2;
+	border-radius:5px;
+}
+#ligne-tweet p{
+	color:black;
 }
 
 .medium-h5{
 	font-size:15px !important;
+}
+.slide-post{
+	position:absolute;
+	top:0px;
 }

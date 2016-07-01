@@ -1,3 +1,11 @@
+<?php 
+/* Short and sweet */
+define('WP_USE_THEMES', false);
+require('./wp-blog-header.php');
+?>
+<?php
+require('http://www.blog.lahidi.org/wp-blog-header.php');
+?>
 <!DOCTYPE html>
 <html ng-app="lahidiApp">
 <head>

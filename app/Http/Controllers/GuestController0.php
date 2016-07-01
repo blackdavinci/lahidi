@@ -30,10 +30,10 @@ class GuestController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
   
 
     public function home(){
@@ -50,8 +50,8 @@ class GuestController extends Controller
         
         
         
-         $blogsext = Article::where('etat',1)->where('type','blog')->orderBy('updated_at','desc')->take(3)->get();
-        foreach ($blogsext as $key => $value) {
+         $articlesblog = Article::where('etat',1)->where('type','blog')->orderBy('updated_at','desc')->take(3)->get();
+        foreach ($articlesblog as $key => $value) {
           if($value->lien!=null){
             $linkPreview = new LinkPreview($value->lien);
             $parsed = $linkPreview->getParsed();
@@ -67,26 +67,49 @@ class GuestController extends Controller
             }
           } 
         }
-       
+
+
       /************************************ Chart Etat ****************************************/
       $etats = Etat::withCount('engagements')->where('etat',1)->get();
 
       foreach ($etats as $key => $value) {
-        $count = intval($value->engagements_count);
-        $data_etats[]= ["name"=>$value->designation,"y"=>$count];
+        $data_etats[]= ["name"=>$value->designation,"y"=>$value->engagements_count,"url"=>"http://bing.com/search?q=foo"];
 
       }
+
+
+      $etatChart["chart"] = ["type" => "pie"];
+      $etatChart['credits'] = ['enabled'=>false];
+      $etatChart['legend'] = ['enabled'=>false];
+      $etatChart["title"] = ["text" => "","verticalAlign"=>"bottom"];
+      $etatChart["xAxis"] = ["type"=>"category"];
+      $etatChart['plotOptions']['series']= ['cursor'=>'pointer','point'=>['events'=>['click'=>"function(){ location.href = this.options.url;}"]]];
+
+       
+      $etatChart["series"] =[["name"=>"Nombre de promesse","colorByPoint"=>true,"data"=>$data_etats]];
+
+
+
     /************************************ Chart Secteur ****************************************/
       
-    $secteurs = Secteur::withCount(['engagements'=>function($query){$query->where('etat',1);}])
-                        ->where('etat',1)->get();
+    $secteurs = Secteur::withCount(['engagements'=>function($query){$query->where('etat',1);}])->where('etat',1)->get();
 
 
-   
     foreach ($secteurs as $key => $value) {
-        $count = intval($value->engagements_count);
-        $data_secteurs[]= ["name"=>$value->nom,"y"=>$count];
+        $data_secteurs[]= ["name"=>$value->nom,"y"=>$value->engagements_count];
     }
+
+    $secteurChart["chart"] = ["type" => "pie"];
+    $secteurChart['credits'] = ['enabled'=>false];
+    $secteurChart['legend'] = ['enabled'=>false];
+    $secteurChart["title"] = ["text" => "","verticalAlign"=>"bottom"];
+    $secteurChart["xAxis"] = ["type"=>"category"];
+    $secteurChart["yAxis"] = ["title"=>["text"=>"Nombre de promesses"]];
+    $secteurChart['plotOptions']['pie'] = ["allowPointSelect"=>true,"dataLabels"=>["enabled"=>true]];
+
+
+    $secteurChart["series"] =[["name"=>"Nombre de promesse","colorByPoint"=>true,"data"=>$data_secteurs]];
+
 
     /************************************ Chart Source ****************************************/
 
@@ -107,8 +130,7 @@ class GuestController extends Controller
          if($key==0){
             $data_sources[]= ["name"=>$value->type,"y"=>$count_sources_president,"drilldown"=>$value->type];
          }
-         $count = intval($value->engagements_count);
-         $data_sources_drilldown_president [] =[$value->designation,$count];
+         $data_sources_drilldown_president [] =[$value->designation,$value->engagements_count];
         }
 
       // Gouvernement
@@ -120,12 +142,29 @@ class GuestController extends Controller
          if($key==0){
             $data_sources[]= ["name"=>$value->type,"y"=>$count_sources_gouvernement,"drilldown"=>$value->type];
          }
-          $count = intval($value->engagements_count);
-            $data_sources_drilldown_gouvernement [] =[$value->designation,$count];
+            $data_sources_drilldown_gouvernement [] =[$value->designation,$value->engagements_count];
 
         }
 
 
+      $sourceChart["chart"] = ["type" => "column"];
+      $sourceChart['credits'] = ['enabled'=>false];
+      $sourceChart['legend'] = ['enabled'=>false];
+      $sourceChart["title"] = ["text" => "","verticalAlign"=>"bottom"];
+      $sourceChart["subtitle"] = ["text" => "Cliquez sur la colonne pour plus de détails"];
+      $sourceChart["xAxis"] = ["type"=>"category"];
+      $sourceChart["yAxis"] = ["title"=>["text"=>"Nombre de promesses"]];
+
+
+      $sourceChart["series"] =[["name"=>"Nombre de promesse","colorByPoint"=>true,"data"=>$data_sources]];
+
+      $sourceChart["drilldown"]["series"]=[["name"=>"Président","id"=>"Président","data"=>$data_sources_drilldown_president ],["name"=>"Gouvernement","id"=>"Gouvernement","data"=>$data_sources_drilldown_gouvernement]];
+
+      // var_dump($sourceChart["drilldown"]["series"]);
+      // var_dump($data_sources);
+      // var_dump(json_encode($sourceChart["series"]));
+      // dd(json_encode($sourceChart));
+      // dd();
     
     	$active = 'home';
 
@@ -139,6 +178,7 @@ class GuestController extends Controller
       $audios = Article::where('etat',1)->where('type','audio')->orderBy('updated_at','desc')->take(3)->get();
       $docs = Article::where('etat',1)->where('type','doc')->orderBy('updated_at','desc')->take(3)->get();
 
+      // $twitter =  Twitter::getUserTimeline(['screen_name' => '_lahidi', 'count' => 8, 'format' => 'object']);
      JavaScript::put([
              'sources' => $data_sources,
              'drilldown_president' => $data_sources_drilldown_president,
@@ -147,10 +187,9 @@ class GuestController extends Controller
              'etats' => $data_etats
          ]);
 
-  
     $commentaires = Commentaire::where('etat',1)->get();
 
-        return view('guest.accueil',compact('active','articles','engagements','blogs','blogsext','videos','docs','audios','nbre_engagements','commentaires'));
+        return view('guest.accueil',compact('active','sourceChart','secteurChart','etatChart','articles','engagements','blogs','videos','docs','audios','nbre_engagements','secteurs','data_sources','data_sources_drilldown_gouvernement','data_sources_drilldown_president','commentaires'));
     }
 
     /**

@@ -32,7 +32,7 @@
 		<!-- Modal Import d'engagement -->
 		<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
-		  {!! Form::open(['method' =>'POST','route' =>['engagement.importExcel'], 'files' => true]) !!}
+		  {!! Form::open(['method' =>'POST','route' =>['pw-admin-engagement.importExcel'], 'files' => true]) !!}
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -62,7 +62,7 @@
 		<!-- Modal de d'ajout d'engagement -->
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
-		  {!! Form::open(['method' =>'POST','route' =>['engagement.store']]) !!}
+		  {!! Form::open(['method' =>'POST','route' =>['pw-admin-engagement.store']]) !!}
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -142,7 +142,7 @@
 								<td>
 									<input  type="checkbox" name="layout" id="1" value=""  ng-checked="allselect">
 								</td>
-								<td data-search="{{$engagement->intitule}}"><a href="{{route('engagement.show',$engagement->id)}}">{{$engagement->intitule}}</a></td>
+								<td data-search="{{$engagement->intitule}}"><a href="{{route('pw-admin-engagement.show',$engagement->id)}}">{{$engagement->intitule}}</a></td>
 								<td>{{$engagement->categorie->designation}}</td>
 								<td>{{$engagement->secteur->nom}}</td>
 								<td>{{$engagement->source}}</td>
@@ -174,7 +174,7 @@
 							      <div class="modal-footer">
 							        <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
 							        <div class="pull-right" style="margin-left:5px;">
-								        {!! Form::open(['method' =>'delete','route' =>['engagement.destroy',1]]) !!}
+								        {!! Form::open(['method' =>'delete','route' =>['pw-admin-engagement.destroy',1]]) !!}
 								        	<input type="hidden" name="action" value='suppression'/>
 								        	{!! Form::submit('Supprimer',['class'=>'btn btn-danger'])!!}
 								      	{!! Form::close() !!}
@@ -187,7 +187,7 @@
 							<!-- Modal de modification d'appréciation -->
 							<div class="modal fade" id="editModal{{$engagement->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							  <div class="modal-dialog">
-							  {!! Form::open(['method' =>'PUT','route' =>['engagement.update',1]]) !!}
+							  {!! Form::open(['method' =>'PUT','route' =>['pw-admin-engagement.update',1]]) !!}
 							    <div class="modal-content">
 							      <div class="modal-header">
 							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

@@ -17,7 +17,7 @@
 				<a href="" class="btn btn-warning" data-toggle="modal" data-target="#edittModal">Supprimer</a>
 			</h4>
 		</li>
-		<li><h4 class="btn-action-menu"><a href="{{route('engagement.edit',$engagement->id)}}" class="btn btn-danger" id="edit-btn">Modifier</a></h4></li>
+		<li><h4 class="btn-action-menu"><a href="{{route('pw-admin-engagement.edit',$engagement->id)}}" class="btn btn-danger" id="edit-btn">Modifier</a></h4></li>
 		
 	</ul>
 </div>
@@ -38,7 +38,7 @@
 						<!-- Modal d'ajout d'etat -->
 						<div class="modal fade" id="etatModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						  <div class="modal-dialog">
-						  {!! Form::open(['method' =>'POST','route' =>['engagement.etat',$engagement->id]]) !!}
+						  {!! Form::open(['method' =>'POST','route' =>['pw-admin-engagement.etat',$engagement->id]]) !!}
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -83,7 +83,7 @@
 						<!-- Tableau d'information de l'engagement -->
 						<div class="col-md-12">
 						<div class="table-responsive">
-						{!! Form::open(['method' =>'PUT','route' =>['engagement.update',$engagement->id]]) !!}
+						{!! Form::open(['method' =>'PUT','route' =>['pw-admin-engagement.update',$engagement->id]]) !!}
 							<table class="table table-nobordered table-nobordered-top table-stripe" id="tableEngagement">
 								<tbody>
 									

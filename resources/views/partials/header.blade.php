@@ -1,21 +1,9 @@
-<div class="row nomargin">
-	<div class="col-md-4">
-		<div class="col-md-3">
-			<div class="logo">
-				<a href="{{route('guest.accueil')}}"><img src="images/logo.jpg" alt="" width="60" /></a>
-			</div>
-		</div>
-		<div class="col-md-9" >
-			<h5><strong>Plateforme de suivi et d'évaluation des promesses du Président et de son Gouvernement</strong></h5>
-		</div>
 
-		
-	</div>
 	<div class="col-md-8 text-right" >
 	<div class="navbar navbar-static-top" id="frame-top-menu">
 		<div class="navigation" id="top-menu">
 			<nav>
-			<ul class=" navbar-nav nav topnav ">
+			<ul class=" navbar-nav nav topnav hidden-xs hidden-sm" style="padding-top:5px">
 				<li class="@if($active=='home') active @endif">
 				<a href="{{route('guest.accueil')}}"><i class="fa fa-home fa-fw"></i> Accueil </a>
 				</li>
@@ -26,10 +14,10 @@
 				<a href="{{route('guest.media')}}">Médiathèque</a>
 				</li>
 				<li class="@if($active=='langue') active @endif">
-				<a href="{{route('guest.langues')}}">Langues</a>
+				<a href="http://www.blog.lahidi.org/index.php/category/langues-nationales/">Langues</a>
 				</li>
 				<li class="@if($active=='blog') active @endif" >
-				<a href="http://www.ablogui.com">Blog</a>
+				<a href="http://www.blog.lahidi.org">Blog</a>
 				</li>
 				<li class="@if($active=='participer') active @endif">
 				<a href="{{route('guest.participer')}}">Participez </a>
@@ -39,5 +27,4 @@
 		</div>
 		<!-- end navigation -->
 	</div>
-</div>
 </div>
