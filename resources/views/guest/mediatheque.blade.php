@@ -3,7 +3,7 @@
 @section('title','Mediathèque')
 
 @section('content')
-<div class="col-md-8">
+<div class="col-md-12">
 	<div class="row">
 		<div class="col-md-12"><h4 ><strong>Vidéos</strong></h4></div>
 		@if(count($videos)!=0)
@@ -45,22 +45,10 @@
 				</div>
 			@endforeach
 		@endif
+		<div class="col-md-4">
+			<iframe width="100%" height="400" src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2FAblogui%2Femission-de-tamata-fm-consacr%25C3%25A9-%25C3%25A0-lahidi%2F&light=1" frameborder="0"></iframe>
+		</div>
 	</div>
 </div>
-<div class="col-md-4">
-	<div class=""><h4 ><strong>Derniers articles</strong></h4></div>
-	<div class="col-md-12"  id="cadre-article">
-		@if(count($articles)!=0)
-			@foreach($articles as $article)
-				<div class="col-md-12">
-					<h5 class="text-justify"><strong><a href="{{route('guest.article',$article->slug)}}">{{$article->titre}}</a></strong></h5>
-					<p class="text-justify">
-					{{substr($article->contenu,0,100)}}..
-					<a href="{{route('guest.article',$article->slug)}}" class="pull-right"><strong>Lire plus</strong></a>
-					</p>
-				</div>
-			@endforeach
-		@endif
-	</div>
-</div>
+
 @endsection

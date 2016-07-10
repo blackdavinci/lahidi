@@ -1,5 +1,9 @@
 @extends('template')
-
+<?php 
+/* Short and sweet */
+define('WP_USE_THEMES', false);
+require('../../bloglahi/wp-blog-header.php');
+?>
 @section('title','Accueil')
 
 @section('content')
@@ -64,7 +68,7 @@
 	<div class="row">
 	
 		<div class="col-md-8">
-			<div class=""><h4 ><strong>Actualité des promesses</strong></h4></div>
+			<div class="section-head-title"><h4 ><strong>Actualité des promesses</strong></h4></div>
 			@foreach($engagements as $engagement)
 				{{--*/ $i++ /*--}}
 				<div class="col-md-12 ligne-engagement ">
@@ -129,7 +133,7 @@
 	</div>
 
 	<div class="col-md-4" id="cadre-tweet">
-		<div class=""><h4 ><strong>Sur Twitter </strong></h4></div>
+		<div class="section-head-title"><h4 ><strong>Sur Twitter </strong></h4></div>
 		<div class="col-md-12"  id="ligne-tweet">
 			<a class="twitter-timeline"  href="https://twitter.com/hashtag/LAHIDI" data-widget-id="748512020505497600">Tweets sur #LAHIDI</a>
 			            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -155,7 +159,61 @@
 	
 	<div class="row">
 	
-		
+		<div class="col-md-8">
+			<div class="section-head-title"><h4 ><strong>Derniers articles</strong></h4></div>
+			<?php
+				// Get the last 3 posts.
+				global $post;
+				$args = array( 'posts_per_page' => 3 );
+				$myposts = get_posts( $args );
+				foreach( $myposts as $post ) :	setup_postdata($post); 
+
+			?>
+			<div class="col-md-4 ligne-engagement ">
+				<div class="col-md-12 " >
+					<img src="<?php the_post_thumbnail_url( 'thumbnail' ); ?>">
+				</div>
+				<div class="col-md-12 ost-blog-content">
+					<h5 class="text-justify">
+						<strong>
+							<a href="<?php the_permalink() ?>" rel="bookmark" title="Permanent Link to <?php the_title_attribute(); ?>"><?php the_title();  ?></a>
+						</strong>
+					</h5>
+					<p>  <?php $content = get_the_content(); ?> {{substr($content,0,70)}}...</p>
+
+				</div>
+			</a>
+		</div>
+		<?php endforeach; ?>
+
+	</div>
+	
+
+	<div class="col-md-4">
+		<div class="section-head-title"><h4 ><strong><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Rapport MOSSEP</strong></h4></div>
+		<div class="col-md-12"  id="cadre-rapport">
+			@foreach($docs as $doc)
+				<div class="col-md-12">
+					<h5 class="text-justify">
+					<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+					<strong><a href="{{route('guest.article',$doc->slug)}}">{{$doc->titre}}</a></strong>
+					</h5>
+					<p class="text-justify">
+					{{substr($doc->contenu,0,100)}}..
+					<a href="{{route('guest.article',$doc->slug)}}" class="pull-right"><strong>Lire plus</strong></a>
+					</p>
+				</div>
+			@endforeach
+		</div>
+	</div>
+	
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<a href="http://www.blog.lahidi.org/" class="btn btn-theme ">
+				<span class="text-uppercase">Tous les articles</span>
+			</a>
+		</div>
 	</div><!-- End Section -->
 	
 	<div class="row">
@@ -169,7 +227,7 @@
 
 	<div class="row">
 		<div class="col-md-12">
-			<div class=""><h4 class=""><strong>Mediathèque</strong></h4></div>
+			<div class="section-head-title"><h4 class=""><strong>Mediathèque</strong></h4></div>
 			@if(count($videos)!=0)
 			<div class="row">
 				<div class="col-md-12">
@@ -266,4 +324,4 @@
 			
 		</div>
 	</div>
-@endsection
+@endsection			

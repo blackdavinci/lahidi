@@ -33,8 +33,8 @@
 			      	<div class="form-group">
 			      	  <label for="type">Type</label>
 			      	 	<select name="type" id="type" class="form-control" >
-			      	 		<option value="president">Président</option>
-			      	 		<option value="gouvernement">Gouvernement</option>
+			      	 		<option value="Président">Président</option>
+			      	 		<option value="Gouvernement">Gouvernement</option>
 			      	 	</select>
 			      	</div>
 		      	  <div class="form-group">
@@ -62,7 +62,6 @@
 		</div>
 		<!-- Tableau de liste des engagements -->
 		<div class="table-responsiv">
-			<form>
 				<table class="table table-striped table-bordered table-hover dataTables-c" id="categorieTable" width="100%" cellpadding="0">
 					<thead>
 						<tr>
@@ -83,7 +82,7 @@
 							<td>
 								<input  type="checkbox" name="layout" id="1" value=""  ng-checked="allselect">
 							</td>
-							<td>@if($categorie->type=='president')Président @else Gouvernement @endif</td>
+							<td>@if($categorie->type=='Président')Président @else Gouvernement @endif</td>
 							<td data-search="{{$categorie->designation}}">{{$categorie->designation}}</td>
 							<td>{{$categorie->id}}</td>
 							<td> @if($categorie->description==null)
@@ -137,6 +136,14 @@
 						      <div class="modal-body">
 						      <div class="row">
 						      <div class="col-md-12">
+						      	<div class="form-group">
+						      	  <label for="type">Type</label>
+						      	 	<select name="type" id="type" class="form-control" >
+						      	 		<option value="Président" @if($categorie->type=='Président') selected 
+						      	 		@endif>Président</option>
+						      	 		<option value="Gouvernement" @if($categorie->type=='Gouvernement') selected @endif>Gouvernement</option>
+						      	 	</select>
+						      	</div>
 						        <div class="form-group">
 						          <label for="intitule">Désignation</label>
 						         <input type="text" class="form-control" id="designation" name="designation" 
@@ -144,7 +151,7 @@
 						        </div>
 						        <div class="form-group">
 						          <label for="note">Description</label>
-						          <textarea name="description" class="form-control" id="description" value="{{$categorie->description}}"></textarea> 
+						          <textarea name="description" class="form-control" id="description">{{$categorie->description}}</textarea> 
 						        </div>
 						       
 						      </div>
@@ -163,7 +170,6 @@
 						@endforeach
 					</tbody>
 				</table>
-			</form>
 		</div>
 	</div>
 @endsection

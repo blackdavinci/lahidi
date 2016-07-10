@@ -39,7 +39,7 @@
 			  <div class="form-group col-md-2">
 			    <label class="sr-only" for="exampleInputEmail3">Catégorie</label>
 			    <select name="categorie" id="categorie" class="form-control" >
-			    	<option value="">Source</option>
+			    	<option value="">Toutes les sources</option>
 			    	@foreach($categorie as $categorie)
 			    		<option value="{{$categorie->id}}" @if(isset($clauses))@foreach($clauses as $key => $clause)  @if($key=='categorie_id' && $clause==$categorie->id) selected @endif @endforeach @endif>
 			    			{{$categorie->designation}}
@@ -50,7 +50,7 @@
 			  <div class="form-group col-md-5">
 			    <label class="sr-only" for="exampleInputPassword3">Secteur</label>
 			    <select name="secteur" id="secteur" class="form-control" >
-			    	<option value="">Secteur</option>
+			    	<option value="">Tous les secteurs</option>
 			    	@foreach($secteurs as $secteur)
 			   			<option value="{{$secteur->id}}" @if(isset($clauses))@foreach($clauses as $key => $clause)  @if($key=='secteur_id' && $clause==$secteur->id) selected @endif @endforeach @endif>
 			   				{{$secteur->nom}}
@@ -61,7 +61,7 @@
 			  <div class="form-group col-md-3">
 			   <label class="sr-only" for="exampleInputPassword3">Etat</label>
 			   <select name="etat" id="etat" class="form-control" >
-			   	<option value="">Verdict</option>
+			   	<option value="">Tous les verdicts</option>
 			   	@foreach($etats as $etat)
 			   		<option value="{{$etat->id}}" @if(isset($relation_clause) && $relation_clause == $etat->id) selected @endif>{{$etat->designation}}</option>
 			   	@endforeach
@@ -177,6 +177,10 @@
 		<div class="col-md-12 text-center">
 			@if(isset($clauses))
 				{{ $engagements->appends($clauses)->links() }}
+			@elseif(isset($relation_clause))
+				{{ $engagements->appends($relation_clause)->links() }}	
+			@elseif(isset($relation_clause) && isset($clauses))
+				{{ $engagements->appends($relation_clause,$clauses)->links() }}	
 			@else
 				{{ $engagements->links() }}	
 			@endif

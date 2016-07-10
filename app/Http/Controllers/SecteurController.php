@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateSecteurRequest;
 
 use App\Secteur;
-
+use App\Engagement;
 
 class SecteurController extends Controller
 {
@@ -56,7 +56,7 @@ class SecteurController extends Controller
         //
 
         Secteur::create($request->all());
-        return redirect(route('secteur.index'));
+        return back();
     }
 
     /**
@@ -92,7 +92,7 @@ class SecteurController extends Controller
     {
         $secteur = Secteur::findOrFail($id);
         $secteur->update($request->all());
-        return redirect(route('secteur.index'));
+        return back();
     }
 
     /**
@@ -103,8 +103,14 @@ class SecteurController extends Controller
      */
     public function destroy($id)
     {
-        var_dump(('Hello'));
-        dd();
-        Secteur::where('id', $id)->delete();
+       $secteur = Secteur::findOrFail($id);
+       $engagements = Engagement::where('secteur_id',$id)->get();
+       foreach ($engagements as $key => $value) {
+           $value->update(['etat'=>0]);
+       }
+       
+       $secteur->update(['etat'=>0]);
+
+       return back();
     }
 }

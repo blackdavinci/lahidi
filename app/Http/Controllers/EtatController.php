@@ -8,6 +8,9 @@ use App\Http\Requests;
 use App\Http\Requests\CreateEtatRequest;
 
 use App\Etat;
+use App\Commentaire;
+use App\Engagement;
+
 class EtatController extends Controller
 {
     
@@ -90,7 +93,7 @@ class EtatController extends Controller
     {
         $etat = Etat::findOrFail($id);
         $etat->update($request->all());
-        return redirect(route('etat.index'));
+        return back();
     }
 
     /**
@@ -101,6 +104,14 @@ class EtatController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $etat = Etat::findOrFail($id);
+        
+        $etat->update(['etat'=>0]);
+        // Detach all engagements from the etats
+        $etat->engagements()->detach();
+
+
+        return back();
     }
 }

@@ -8,7 +8,7 @@
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Plateforme de suivi et d'évaluation des promesses du Président Alpha Condé et celles de son Gouvernement." />
-    <meta name="author" content="ABLOGUI (Association des Blogueurs de Guinée)" />
+    <meta name="Cissé Ousmane" content="ABLOGUI (Association des Blogueurs de Guinée)" />
 
     
     <!-- Bootstrap Core & Custom CSS -->

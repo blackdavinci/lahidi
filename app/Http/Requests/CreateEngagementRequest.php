@@ -27,7 +27,6 @@ class CreateEngagementRequest extends Request
             'intitule'=>'required',
             'categorie_id'=>'required',
             'secteur_id'=>'required',
-            'source'=>'required'
         ];
     }
 
@@ -42,7 +41,6 @@ class CreateEngagementRequest extends Request
             'intitule.required' => 'Promesse obligatoire',
             'categorie_id.required' => 'Catégorie obligatoire',
             'secteur_id.required' => 'Secteur obligatoire',
-            'source.required' => 'Source obligatoire',
         ];
     }
 }

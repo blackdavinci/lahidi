@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateCategorieRequest;
 
 use App\Categorie;
+use App\Engagement;
 
 class CategorieController extends Controller
 {
@@ -54,7 +55,7 @@ class CategorieController extends Controller
     public function store(CreateCategorieRequest $request)
     {
         Categorie::create($request->all());
-        return redirect(route('categorie.index'));
+        return redirect(route('pw-admin-categorie.index'));
     }
 
     /**
@@ -90,7 +91,7 @@ class CategorieController extends Controller
     {
         $categorie = Categorie::findOrFail($id);
         $categorie->update($request->all());
-        return redirect(route('categorie.index'));
+        return redirect(route('pw-admin-categorie.index'));
     }
 
     /**
@@ -101,6 +102,14 @@ class CategorieController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $categorie = Categorie::findOrFail($id);
+        $engagements = Engagement::where('categorie_id',$id)->get();
+        foreach ($engagements as $key => $value) {
+            $value->update(['etat'=>0]);
+        }
+
+        $categorie->update(['etat'=>0]);
+        
+        return back();
     }
 }

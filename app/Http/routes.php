@@ -56,7 +56,7 @@ Route::post('import',['uses'=>'EngagementController@importExcel','as'=>'pw-admin
 Route::post('export',['uses'=>'EngagementController@exportExcel','as'=>'pw-admin-engagement.exportExcel']);
 Route::post('addEtat/{id}',['uses'=>'EngagementController@addEtat','as'=>'pw-admin-engagement.etat']);
 Route::put('updateEtat/{id}',['uses'=>'EngagementController@updateEtat','as'=>'pw-admin-engagement.updateEtat']);
-Route::delete('delteEtat/{id}',['uses'=>'EngagementController@deleteEtat','as'=>'pw-admin-engagement.deleteeEtat']);
+Route::delete('delteEtat/{id}',['uses'=>'EngagementController@deleteEtat','as'=>'pw-admin-engagement.deleteEtat']);
 
 Route::resource('pw-admin-engagement','EngagementController');
 

@@ -39,5 +39,10 @@ jQuery(document).ready(function($) {
 		    }
 	});
 
+	$('.input-daterange').datepicker({
+	    language: "fr",
+	    format: "dd-mm-yyyy",
+	    orientation: "top left"
+	});
 	
 });

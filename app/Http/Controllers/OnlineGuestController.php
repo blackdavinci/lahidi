@@ -48,7 +48,26 @@ class GuestController extends Controller
     public function index()
     {
         
-               
+        
+        
+         $blogsext = Article::where('etat',1)->where('type','blog')->orderBy('updated_at','desc')->take(3)->get();
+        foreach ($blogsext as $key => $value) {
+          if($value->lien!=null){
+            $linkPreview = new LinkPreview($value->lien);
+            $parsed = $linkPreview->getParsed();
+            foreach ($parsed as $parserName => $link) {
+              $value->linkUrl = $link->getRealUrl();
+              $value->linkTitle = $link->getTitle();
+              $value->linkDescription = $link->getDescription();
+              $value->linkImage = $link->getImage();
+              if ($link instanceof VideoLink) {
+                  $value->linkVideoId = $link->getVideoId();
+                  $value->linkVideo = $link->getEmbedCode();
+              }
+            }
+          } 
+        }
+       
       /************************************ Chart Etat ****************************************/
       $etats = Etat::withCount('engagements')->where('etat',1)->get();
 
@@ -131,7 +150,7 @@ class GuestController extends Controller
   
     $commentaires = Commentaire::where('etat',1)->get();
 
-        return view('guest.accueil',compact('active','articles','engagements','blogs','videos','docs','audios','nbre_engagements','commentaires'));
+        return view('guest.accueil',compact('active','articles','engagements','blogs','blogsext','videos','docs','audios','nbre_engagements','commentaires'));
     }
 
     /**
@@ -151,8 +170,9 @@ class GuestController extends Controller
     	$categorie = Categorie::where('etat',1)->orderBy('designation','asc')->get();
     	$etats = Etat::where('etat',1)->orderBy('designation','asc')->get();
     	$commentaires = Commentaire::where('etat',1)->get();
+    	
 
-        return view('guest.promesses',compact('active','categorie','secteurs','categories','etats',
+        return view('guest.president',compact('active','categorie','secteurs','categories','etats',
                                             'commentaires','engagements'));
     }
 
@@ -182,25 +202,23 @@ class GuestController extends Controller
         if(!empty($_GET['categorie_id'])) {
           $clauses['categorie_id'] = $_GET['categorie_id'];
         }
-        if(!empty($_GET['secteur_id'])) {
-            $clauses['secteur_id'] = $_GET['secteur_id'];
+        if(!empty($_GET['seceur_id'])) {
+            $clauses['secteur_id'] = $_GET['secteur'];
         }
         
-        $engagements = Engagement::with('secteur','categorie','etats')
-                            ->where('etat',1)->where($clauses)->orderBy('updated_at','desc')
-                            ->paginate(15);
-        
-
         if(!empty($_GET['etat'])) {
           $relation_clause= $_GET['etat'];
-          $engagements = Engagement::with('secteur','categorie','etats')->whereHas('etats', function($query) 
-                          use($relation_clause){$query->where('engagement_etat.etat_id',$relation_clause);})
-                              ->where('etat',1)->where($clauses)->orderBy('updated_at','desc')
-                              ->paginate(15);
+
         }
 
       }
       
+      
+      $engagements = Engagement::with('secteur','categorie','etats')
+                                     ->where('etat',1)->where($clauses)->orderBy('updated_at','desc')
+                                     ->paginate(15);
+
+
      
       
       $categories = Categorie::with('engagements')->where('type','president')->get();
@@ -211,7 +229,7 @@ class GuestController extends Controller
 
       
 
-         return view('guest.promesses',compact('active','categorie','secteurs','categories','etats',
+         return view('guest.president',compact('active','categorie','secteurs','categories','etats',
                                              'commentaires','engagements','clauses','relation_clause'));
      }
 

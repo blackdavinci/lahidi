@@ -19,6 +19,7 @@ use Excel;
 use DB;
 use stdClass;
 use Carbon\Carbon;
+use DateTime;
 
 class EngagementController extends Controller
 {
@@ -46,6 +47,7 @@ class EngagementController extends Controller
         $categories = Categorie::where('etat',1)->orderBy('designation','asc')->get();
         $nombre_engagement = count($engagements);
         
+
         return view('admin.list-engagements',compact('active','secteurs','categories','engagements','nombre_engagement'));
     }
 
@@ -65,11 +67,11 @@ class EngagementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateEngagementRequest $request)
     {
         $engagement = Engagement::create($request->all());
-        $defaultEtat = Etat::select('id')->where('designation','Pas encore tenu')->get();
-        $engagement->etats()->attach($defaultEtat);
+
+        $engagement->etats()->attach(12);
         
         return back();
     }
@@ -102,8 +104,7 @@ class EngagementController extends Controller
                                                 'district' => $value->district,
                                                 'date_debut' => $value->debut,
                                                 'date_fin' => $value->fin]);
-                                $defaultEtat = Etat::select('id')->where('designation','Pas encore tenu')->get();
-                                $engagement->etats()->attach($defaultEtat);
+                                $engagement->etats()->attach(12);
                             }
                         }
                         
@@ -140,15 +141,10 @@ class EngagementController extends Controller
     public function show($id)
     {
        $active = 'engagement';
-       $engagement = Engagement::withCount('etats')->findOrFail($id);
-       // $commentaires =  DB::table('commentaires')
-       //                  ->join('engagement_etat', 'commentaires.engagement_etat_id', '=', 'engagement_etat.id')
-       //                  ->select('commentaires.*', 'engagement_etat.*')
-       //                  ->where('commentaires.etat',1)
-       //                  ->orderBy('commentaires.updated_at','desc')
-       //                  ->get();
+       $engagement = Engagement::withCount('etats')->where('etat',1)->findOrFail($id);
+      
        $commentaires = Commentaire::where('etat',1)->orderBy('updated_at','desc')->get();
-       
+
        $etats = Etat::where('etat',1)->get();  
        
        
@@ -163,9 +159,11 @@ class EngagementController extends Controller
      */
     public function edit($id)
     {
-        // $active = 'engagement';
-        // $engagement = Engagement::findOrFail($id);
-        // return view('admin.edit-engagement',compact('active','engagement'));
+        $active = 'engagement';
+        $engagement = Engagement::findOrFail($id);
+        $categories = Categorie::where('etat',1)->orderBy('updated_at','desc')->get();
+        $secteurs = Secteur::where('etat',1)->orderBy('updated_at','desc')->get();
+        return view('admin.edit-engagement',compact('active','engagement','categories','secteurs'));
     }
 
     /**
@@ -177,7 +175,19 @@ class EngagementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except('date_debut','date_fin');
+        $engagement = Engagement::findOrFail($id);
+        $engagement->update($data);
+
+       $dt_debut = new DateTime($request->input('date_debut'));
+       $dt_fin = new DateTime($request->input('date_fin'));
+
+       $date_debut =  $dt_debut->format('Y-m-d');
+       $date_fin =  $dt_fin->format('Y-m-d');
+
+        $engagement->update(['date_debut'=>$date_debut,'date_fin'=>$date_fin]);
+         return redirect(route('pw-admin-engagement.show',$id));
+
     }
 
     /**
@@ -191,8 +201,7 @@ class EngagementController extends Controller
     {
         
         $engagement = Engagement::findOrFail($id);
-        $engagement->etats()->attach($request->input('etat_id'), ['titre_commentaire' => $request->input('titre_commentaire'), 
-                                            'commentaire'=>$request->input('commentaire')]);
+        $engagement->etats()->attach($request->input('etat_id'), ['titre_commentaire' => $request->input('titre_commentaire'),'commentaire'=>$request->input('commentaire')]);
         return back();
     }
 
@@ -218,7 +227,20 @@ class EngagementController extends Controller
      */
     public function deleteEtat(Request $request, $id)
     {
-        $engagement = Engagement::findOrFail($id);
+        $engagement = Engagement::with('etats')->findOrFail($id);
+
+        $commentaires = Commentaire::get();
+        foreach ($engagement->etats as $key => $value) {
+            if($value->pivot->etat_id == $request->input('etat_id')){
+                $comment_id = $value->pivot->id;
+            } 
+           }
+        foreach ($commentaires as $key => $value) {
+            if($value->engagement_etat_id == $comment_id){
+                $value->delete();
+            }
+        }
+ 
         $engagement->etats()->detach($request->input('etat_id'));
         return back();
     }
@@ -232,9 +254,11 @@ class EngagementController extends Controller
     public function destroy($id)
     {
         $engagement = Engagement::findOrFail($id);
+        
+        $engagement->update(['etat'=>0]);
         // Detach all etats from the engagement
         $engagement->etats()->detach();
 
-        return redirect(route('engagement.index'));
+        return redirect(route('pw-admin-engagement.index'));
     }
 }

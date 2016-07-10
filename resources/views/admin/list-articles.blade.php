@@ -80,7 +80,6 @@
 		</div>
 				<!-- Tableau de liste des engagements -->
 				<div class="table-responsiv">
-					<form>
 						<table class="table table-striped table-bordered table-hover dataTables-c" id="articleTable" width="100%" cellpadding="0">
 							<thead>
 								<tr>
@@ -128,10 +127,10 @@
 								    <div class="modal-content">
 								      <div class="modal-header">
 								        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								        <h4 class="modal-title" id="myModalLabel">Suppression de article</h4>
+								        <h4 class="modal-title" id="myModalLabel">Suppression d'article</h4>
 								      </div>
 								      <div class="modal-body">
-								        Voulez-vous vraimment supprimer le article <strong>{{$article->designation}}</strong> ?
+								        Voulez-vous vraimment supprimer l'article <strong>{{$article->titre}}</strong> ?
 								      </div>
 								      <div class="modal-footer">
 								        <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
@@ -153,19 +152,43 @@
 								    <div class="modal-content">
 								      <div class="modal-header">
 								        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								        <h4 class="modal-title" id="myModalLabel">Modification de article</h4>
+								        <h4 class="modal-title" id="myModalLabel">Modification d'article</h4>
 								      </div>
 								      <div class="modal-body">
 								      <div class="row">
 								      <div class="col-md-12">
 								        <div class="form-group">
-								          <label for="intitule">Désignation</label>
-								         <input type="text" class="form-control" id="designation" name="designation" 
-								         value="{{$article->designation}}">
+								        <div class="form-group">
+								          <label for="titre">Type</label>
+								         <select class="form-control" name="type" ng-model="type">
+								         	<option value="article" ng-selected="{{$article->type=='article'}}">Article</option>
+								         	<option value="audio" ng-selected="{{$article->type=='audio'}}">Audio</option>
+								         	<option value="blog" ng-selected="{{$article->type=='blog'}}">Blog</option>
+								         	<option value="doc" ng-selected="{{$article->type=='doc'}}">Rapport</option>
+								         	<option value="video" ng-selected="{{$article->type=='video'}}">Vidéo</option>
+								         </select>
 								        </div>
 								        <div class="form-group">
-								          <label for="note">Description</label>
-								          <textarea name="description" class="form-control" id="description" value="{{$article->description}}"></textarea> 
+								          <label for="titre">Titre</label>
+								         <input type="text" class="form-control" id="titre" value="{{$article->titre}}" name="titre">
+								        </div>
+								        
+								        <div class="form-group">
+								          <label for="note">Contenu</label>
+								          <textarea name="contenu" class="form-control" id="contenu">{{$article->contenu}}</textarea> 
+								        </div>
+								        <div class="form-group" ng-show="{{$article->type=='audio' || $article->type=='video' || $article->type=='blog'}}">
+								        	<label for="lien">Lien URL</label>
+								        <input type="text" id="lien" name="lien" class="form-control" value="{{$article->lien}}">
+								        </div>
+								        <div class="form-group" ng-show="{{$article->type}}== 'article'">
+								        	<label for="image">Image</label>
+								        	<input type="file" id="image" name="image" class="form-control">
+								        </div>
+								        
+								        <div class="form-group" ng-show="{{$article->type}}== 'doc'">
+								        	<label for="image">Document</label>
+								        	<input type="file" id="doc" name="doc" class="form-control">
 								        </div>
 								       
 								      </div>
@@ -184,7 +207,6 @@
 								@endforeach
 							</tbody>
 						</table>
-					</form>
 				</div>
 			</div>
 		@endsection

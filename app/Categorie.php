@@ -13,7 +13,7 @@ class Categorie extends Model
      * @var array
      */
 
-     protected $fillable = ['designation','description','etat'];
+     protected $fillable = ['designation','description','etat','type'];
 
      /**
      * The relationship.

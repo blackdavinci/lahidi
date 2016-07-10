@@ -13,6 +13,8 @@
 {!! Html::style('css/sb-admin-2.cs') !!}
 {!! Html::style('css/custom.css') !!}
 
+{{-- Bootstrap Datepicker CSS --}}
+{!! Html::style('css/bootstrap-datepicker3.css') !!}
 
 <!-- Magic-Check CSS -->
 {!! Html::style('css/magic-check.css') !!}
@@ -169,12 +171,12 @@
 	================================================== -->
 	{!! HTML::script('js/angular.min.js') !!}
 	{!! HTML::script('js/app.js') !!}
+
+	{{-- Bootstrap Datepicker JS --}}
 	{!! HTML::script('js/bootstrap-datepicker.min.js') !!}
 	{!! HTML::script('js/locales/bootstrap-datepicker.fr.min.js') !!}
 	
 	
-	{!! HTML::script('js/easypiechart.js') !!}
-
 	<!-- Custom  Javascript Function -->
 	{!! HTML::script('js/custom-function.js') !!}
 	

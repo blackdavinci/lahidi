@@ -78,7 +78,6 @@
 		      	  <div class="form-group">
 		      	    <label for="secteur">Catégorie</label>
 		      	   	<select name="categorie_id" id="secteur" class="form-control" >
-		      	   		<option value="0">Aucune</option>
 		      	   		@foreach($categories as $categorie)
 		      	   			<option value="{{$categorie->id}}">{{$categorie->designation}}</option>
 		      	   		@endforeach	
@@ -87,7 +86,6 @@
 		      	  <div class="form-group">
 		      	    <label for="secteur">Secteur</label>
 		      	   	<select name="secteur_id" id="secteur" class="form-control" >
-		      	   		<option value="0">Aucun</option>
 		      	   		@foreach($secteurs as $secteur)
 		      	   			<option value="{{$secteur->id}}">{{$secteur->nom}}</option>
 		      	   		@endforeach		
@@ -120,7 +118,6 @@
 		</div>
 		<!-- Tableau de liste des engagements -->
 		<div class="table-responsive">
-			<form>
 					<table class="table table-striped table-bordered table-hover dataTables-c" id="engagementTable" width="100%" cellpadding="0">
 						<thead>
 							<tr>
@@ -148,7 +145,7 @@
 								<td>{{$engagement->source}}</td>
 								<td>{{$engagement->created_at}}</td>
 								<td class="">
-									<a href="" class="btn-action" data-toggle="modal" data-target="#editModal{{$engagement->id}}">
+									<a href="{{route('pw-admin-engagement.edit',$engagement->id)}}" class="btn-action">
 										<i class="fa fa-edit fa-1x" aria-hidden="true"></i>
 									</a>
 								</td>
@@ -159,7 +156,7 @@
 								</td>
 							</tr>
 							
-							
+
 							<!-- Modal de confirmation de suppression d'engagement -->
 							<div class="modal fade" id="deleteModal{{$engagement->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 							  <div class="modal-dialog">
@@ -174,7 +171,7 @@
 							      <div class="modal-footer">
 							        <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
 							        <div class="pull-right" style="margin-left:5px;">
-								        {!! Form::open(['method' =>'delete','route' =>['pw-admin-engagement.destroy',1]]) !!}
+								        {!! Form::open(['method' =>'delete','route' =>['pw-admin-engagement.destroy',$engagement->id]]) !!}
 								        	<input type="hidden" name="action" value='suppression'/>
 								        	{!! Form::submit('Supprimer',['class'=>'btn btn-danger'])!!}
 								      	{!! Form::close() !!}
@@ -183,35 +180,9 @@
 							    </div>
 							  </div>
 							</div>
-
-							<!-- Modal de modification d'appréciation -->
-							<div class="modal fade" id="editModal{{$engagement->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-							  <div class="modal-dialog">
-							  {!! Form::open(['method' =>'PUT','route' =>['pw-admin-engagement.update',1]]) !!}
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							        <h4 class="modal-title" id="myModalLabel">Modification d'engagement</h4>
-							      </div>
-							      <div class="modal-body">
-							      <div class="row">
-							      
-								  </div>
-							      </div>
-							      <div class="modal-footer">
-							        <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
-							        <div class="pull-right" style="margin-left:5px;">
-								        {!! Form::submit('Enregistrer',['class'=>'btn btn-success'])!!}
-							      	</div>
-							      </div>
-							    </div>
-							    {!! Form::close() !!}
-							  </div>
-							</div>
 						@endforeach
 						</tbody>
 					</table>
-			</form>
 		</div>
 	</div>
 @endsection

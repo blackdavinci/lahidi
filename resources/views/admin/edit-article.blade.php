@@ -5,12 +5,8 @@
 
 @section('page-menu')
 	<ul>
-		<li><h4 class="btn-action-menu"><a href="" class="btn btn-danger">Supprimmer</a></h4></li>
-		<li>
-			<h4 class="btn-action-menu">
-				<a href="" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Modifier</a>
-			</h4>
-		</li>
+		<li><h4 class="btn-action-menu"><a href="{{route('pw-admin-article.show',$article->id)}}" class="btn btn-danger">Annuler</a></h4></li>
+		
 	</ul>
 @endsection
 
@@ -19,7 +15,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body tabs">
 				<ul class="nav nav-tabs">
-					<li class="active"><a href="#article" data-toggle="tab" class="text-uppercase"><b>Fiche article</b></a></li>
+					<li class="active"><a href="#article" data-toggle="tab" class="text-uppercase"><b>Modification article</b></a></li>
 				</ul>
 
 				<div class="tab-content">
@@ -29,6 +25,7 @@
 						<!-- Tableau d'information de l'article -->
 						<div class="col-md-12">
 						<div class="table-responsive">
+						{!! Form::open(['method' =>'PUT','route' =>['pw-admin-article.update',$article->id]]) !!}
 							<table class="table table-nobordered table-nobordered-top table-stripe" id="tablearticle">
 								<tbody>
 									<tr><td class="titlearticle"><h4>Type</h4></td></tr> 
@@ -53,6 +50,7 @@
 									 <tr><td class="dataarticle">{{$article->note}}</td></tr>
 								</tbody>
 							</table>
+							{!! Form::close() !!}
 						</div>
 						</div>
 

@@ -68,4 +68,8 @@ class Engagement extends Model
         return $this->hasMany('App\EngagementEtat');
     }
 
+    public function engagementetatsfilter($id){
+        return $this->belongsToMany('App\Etats')->wherePivot('etat_id', $id);
+    }
+
 }
