@@ -1,3 +1,7 @@
+<?php
+	define('WP_USE_THEMES', false);
+	require('../../bloglahi/wp-blog-header.php');
+?>
 @extends('template')
 
 @section('title','Accueil')
@@ -9,43 +13,6 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div ng-controller="graphController as graph">
-						<div class="row">
-							<div class="col-md-12 text-center hidden-xs" id="chrono">	
-								<div class="col-md-12"><h4><strong>Fin de mandat dans</strong></h4></div>
-								<div class="col-md-6 col-md-offset-3 " >
-									<script type="application/javascript">
-
-									var myCountdownTest = new Countdown({
-										year: 2020,
-										month	: 0, 
-										day		: 0,
-										width	: 500, 
-										height	: 70,
-										numbers		: 	{
-											font 	: "Open Sans, sans-serif",
-											color	: "#d9534f",
-											bkgd	: "#FFFFFF",
-											fontSize : 200,
-											rounded	: 0.15,				// percentage of size 
-											
-											},
-										labels	:	{
-			                             	font  	: "Open Sans, sans-serif",
-				                            color 	: "#000000",
-				                            offset : 0, // Number of pixels to push the labels down away from numbers. 
-				                            textScale 	: 1, // Percentage of size
-				                            weight	: "bold"	// < - no comma on last item!
-			                         },
-										hideLine	: true								
-																	 	
-									});
-
-									</script>
-								</div>
-								<br/>
-								{{--*/ /*--}}
-							</div>
-						</div>
 			<div class="row">
 				<div class="col-md-4">
 					<div class="col-md-12">
@@ -223,7 +190,7 @@
 	
 
 	<div class="col-md-4">
-		<div class="section-head-title"><h4 ><strong><i class="fa fa-file-pdf-o" aria-hidden="true"></i>Documents et  Rapports MOSSEP</strong></h4></div>
+		<div class="section-head-title"><h4 ><strong><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Rapport MOSSEP</strong></h4></div>
 		<div class="col-md-12"  id="cadre-rapport">
 			@foreach($docs as $doc)
 				<div class="col-md-12">

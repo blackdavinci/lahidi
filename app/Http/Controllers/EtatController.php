@@ -10,6 +10,7 @@ use App\Http\Requests\CreateEtatRequest;
 use App\Etat;
 use App\Commentaire;
 use App\Engagement;
+use Auth;
 
 class EtatController extends Controller
 {
@@ -31,11 +32,15 @@ class EtatController extends Controller
      */
     public function index()
     {
-        $active = 'etat';
-        $etats = Etat::where('etat',1)->orderBy('designation')->get();
-        $nombre_etat = count($etats);
+        if(Auth::user()->role=='admin'){
+            $active = 'etat';
+            $etats = Etat::where('etat',1)->orderBy('designation')->get();
+            $nombre_etat = count($etats);
 
-        return view('admin.list-etats',compact('active','etats','nombre_etat'));
+            return view('admin.list-etats',compact('active','etats','nombre_etat'));
+        }else{
+            return redirect('/logout')->withErrors("Vueillez vous connecter en tant qu\'administrateur");
+        }
     }
 
     /**
@@ -56,8 +61,13 @@ class EtatController extends Controller
      */
     public function store(CreateEtatRequest $request)
     {
-        Etat::create($request->all());
-        return back();
+        if(Auth::user()->role=='admin'){
+           Etat::create($request->all());
+           return back(); 
+        }else{
+            return redirect('/logout')->withErrors("Vueillez vous connecter en tant qu\'administrateur");
+        }
+        
     }
 
     /**
@@ -91,9 +101,14 @@ class EtatController extends Controller
      */
     public function update(CreateEtatRequest $request, $id)
     {
-        $etat = Etat::findOrFail($id);
-        $etat->update($request->all());
-        return back();
+        if(Auth::user()->role=='admin'){
+            $etat = Etat::findOrFail($id);
+            $etat->update($request->all());
+            return back();
+        }else{
+            return redirect('/logout')->withErrors("Vueillez vous connecter en tant qu\'administrateur");
+        }
+
     }
 
     /**
@@ -104,14 +119,14 @@ class EtatController extends Controller
      */
     public function destroy($id)
     {
-
-        $etat = Etat::findOrFail($id);
-        
-        $etat->update(['etat'=>0]);
-        // Detach all engagements from the etats
-        $etat->engagements()->detach();
-
-
-        return back();
+        if(Auth::user()->role=='admin'){
+            $etat = Etat::findOrFail($id);
+            $etat->update(['etat'=>0]);
+            // Detach all engagements from the etats
+            $etat->engagements()->detach();
+            return back();
+        }else{
+            return redirect('/logout')->withErrors("Vueillez vous connecter en tant qu\'administrateur");
+        }
     }
 }

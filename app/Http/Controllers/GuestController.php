@@ -15,6 +15,7 @@ use App\Categorie;
 use App\Commentaire;
 use App\Etat;
 use App\Secteur;
+// use App\Post;
 
 use DB;
 use Preview;
@@ -48,15 +49,23 @@ class GuestController extends Controller
     public function index()
     {
         
-               
+      // $clauses = ['post_status'=>'publish','post_type'=>'post'];    
+      // $posts = Post::where($clauses)->get();
+      // // foreach ($posts as $key => $value) {
+      // //   var_dump($value->title.' => '.$value->guid.'<br/>');
+      // // }
+      // // dd();
       /************************************ Chart Etat ****************************************/
       $etats = Etat::withCount('engagements')->where('etat',1)->get();
-
+      
       foreach ($etats as $key => $value) {
         $count = intval($value->engagements_count);
-        $data_etats[]= ["name"=>$value->designation,"y"=>$count];
+        $route = route('guest.promesssefilter',['etat'=>$value->id]);
+        $data_etats[]= ["name"=>$value->designation,"y"=>$count,"url"=>$route];
 
       }
+    
+     
     /************************************ Chart Secteur ****************************************/
       
     $secteurs = Secteur::withCount(['engagements'=>function($query){$query->where('etat',1);}])
@@ -66,7 +75,8 @@ class GuestController extends Controller
    
     foreach ($secteurs as $key => $value) {
         $count = intval($value->engagements_count);
-        $data_secteurs[]= ["name"=>$value->nom,"y"=>$count];
+        $route = route('guest.promesssefilter',['secteur_id'=>$value->id]);
+        $data_secteurs[]= ["name"=>$value->nom,"y"=>$count,"url"=>$route];
     }
 
     /************************************ Chart Source ****************************************/
@@ -128,10 +138,10 @@ class GuestController extends Controller
              'etats' => $data_etats
          ]);
 
-  
     $commentaires = Commentaire::where('etat',1)->get();
+    
 
-        return view('guest.accueil',compact('active','articles','engagements','blogs','videos','docs','audios','nbre_engagements','commentaires'));
+        return view('guest.accueil',compact('active','articles','engagements','blogs','videos','docs','audios','nbre_engagements','commentaires','posts'));
     }
 
     /**
@@ -165,6 +175,7 @@ class GuestController extends Controller
      {
       $active = 'promesses';
       $clauses = [];
+      $clause['etat'] = '';
       $relation_clause = 0;
       if(!empty($request->input('categorie'))) {
         $clauses['categorie_id'] = $request->input('categorie');
@@ -175,7 +186,7 @@ class GuestController extends Controller
       
       if(!empty($request->input('etat'))) {
         $relation_clause = $request->input('etat');
-
+        $clause['etat'] = $relation_clause;
       }
        
       if(isset($_GET)){
@@ -184,6 +195,10 @@ class GuestController extends Controller
         }
         if(!empty($_GET['secteur_id'])) {
             $clauses['secteur_id'] = $_GET['secteur_id'];
+            
+        }
+        if(!empty($_GET[0]['secteur_id'])){
+            $clauses['secteur_id'] = $_GET[0]['secteur_id'];
         }
         
         $engagements = Engagement::with('secteur','categorie','etats')
@@ -192,7 +207,16 @@ class GuestController extends Controller
         
 
         if(!empty($_GET['etat'])) {
-          $relation_clause= $_GET['etat'];
+          $relation_clause = $_GET['etat'];
+          $clause['etat'] = $relation_clause;
+          $engagements = Engagement::with('secteur','categorie','etats')->whereHas('etats', function($query) 
+                          use($relation_clause){$query->where('engagement_etat.etat_id',$relation_clause);})
+                              ->where('etat',1)->where($clauses)->orderBy('updated_at','desc')
+                              ->paginate(15);
+        }
+        if(!empty($_GET[0]['etat'])){
+          $relation_clause = $_GET[0]['etat'];
+          $clause['etat'] = $relation_clause;
           $engagements = Engagement::with('secteur','categorie','etats')->whereHas('etats', function($query) 
                           use($relation_clause){$query->where('engagement_etat.etat_id',$relation_clause);})
                               ->where('etat',1)->where($clauses)->orderBy('updated_at','desc')
@@ -202,7 +226,7 @@ class GuestController extends Controller
       }
       
      
-      
+    
       $categories = Categorie::with('engagements')->where('type','president')->get();
       $secteurs = Secteur::where('etat',1)->get();
       $categorie = Categorie::where('etat',1)->get();
@@ -210,9 +234,8 @@ class GuestController extends Controller
       $commentaires = Commentaire::where('etat',1)->get();
 
       
-
          return view('guest.promesses',compact('active','categorie','secteurs','categories','etats',
-                                             'commentaires','engagements','clauses','relation_clause'));
+                                             'commentaires','engagements','clauses','clause','relation_clause'));
      }
 
 
@@ -226,8 +249,10 @@ class GuestController extends Controller
     {
        $active = 'promesses';
        $engagement = Engagement::where('etat',1)->where('slug',$slug)->first();
+       $engagements = Engagement::with('etats')->where('etat',1)->orderBy('updated_at','desc')->take(3)->get();
+       $commentaires = Commentaire::where('etat',1)->get();
 
-       return view('guest.detail',compact('active','engagement','slug'));
+       return view('guest.detail',compact('active','engagement','commentaires','engagements','slug'));
     }
 
     /**
@@ -266,19 +291,21 @@ class GuestController extends Controller
         $videos = Article::where('etat',1)->where('type','video')->get();
         $audios = Article::where('etat',1)->where('type','audio')->get();
         $articles = Article::where('etat',1)->where('type','article')->orderBy('updated_at','desc')->get();
-        
+
         return view('guest.mediatheque',compact('active','videos','audios','articles'));
     }
 
     /**
-     * Langue Nko function.
+     * Download Document function.
      *
      * @return \Illuminate\Http\Response
      */
-    public function langueNko()
+    public function downloadDoc($name)
     {
-    	$active = 'langue';
-        return view('guest.langue-nko',compact('active'));
+    	 $active = 'blog';
+       $pathToFile = 'files/docs/'.$name;
+        return response()->download($pathToFile);
+
     }
 
 

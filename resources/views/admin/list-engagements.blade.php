@@ -92,6 +92,15 @@
 		      	   	</select>
 		      	  </div>
 		      	  <div class="form-group">
+		      	    <label for="etat">Etat</label>
+		      	    <select name="etat_id" id="etat" class="form-control" >
+		      	    	<option value="null">Aucun</option>
+		      	      @foreach($etats as $etat)
+		      	        <option value="{{$etat->id}}">{{$etat->designation}}</option>
+		      	      @endforeach   
+		      	    </select>
+		      	  </div>
+		      	  <div class="form-group">
 		      	    <label for="source">Source</label>
 		      	   	<input type="text" class="form-control" id="source" placeholder="Source de la promesse" name="source">
 		      	  </div>
@@ -150,7 +159,7 @@
 									</a>
 								</td>
 								<td>
-								 <a href="" class="btn-action" data-toggle="modal" data-target="#deleteModal{{$engagement->id}}">
+								 <a href="" class="btn-action @if(Auth::user()->role!='amdin') disabled @endif" data-toggle="modal" data-target="#deleteModal{{$engagement->id}}">
 										<i class="fa fa-trash fa-1x" aria-hidden="true"></i>
 									</a>
 								</td>

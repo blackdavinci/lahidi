@@ -175,15 +175,11 @@
 	@endforeach
 	<div class="row">
 		<div class="col-md-12 text-center">
-			@if(isset($clauses))
-				{{ $engagements->appends($clauses)->links() }}
-			@elseif(isset($relation_clause))
-				{{ $engagements->appends($relation_clause)->links() }}	
-			@elseif(isset($relation_clause) && isset($clauses))
-				{{ $engagements->appends($relation_clause,$clauses)->links() }}	
-			@else
-				{{ $engagements->links() }}	
-			@endif
+		@if(isset($clause) || isset($clauses))
+			{{ $engagements->appends($clause,$clauses)->links() }}	
+		@else
+			{{ $engagements->links() }}	
+		@endif
 		</div>
 	</div>
 	

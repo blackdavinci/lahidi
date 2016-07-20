@@ -1,7 +1,7 @@
 <div class="row">
-	<div class="col-md-4" id="ocation">
+	{{-- <div class="col-md-4" id="ocation">
 	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d837.261294139005!2d-13.674569146311688!3d9.548156387255894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMzInNTMuNCJOIDEzwrA0MCcyNi40Ilc!5e1!3m2!1sfr!2sfr!4v1467359390191"  frameborder="0" style="border:0" allowfullscreen></iframe>
-	</div>
+	</div> --}}
 	<div class="col-md-4">
 		<div class="widget">		
 			<h5 class="widgetheading">A propos de LAHIDI</h5>					
@@ -72,7 +72,7 @@
 
 		&nbsp;&nbsp;<a href="http://www.facebook.com/layidign"><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
 
-		&nbsp;&nbsp;<a href="https://twitter.com/_lahidi"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
+		&nbsp;&nbsp;<a href="https://twitter.com/LahidiGn"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i></a>
 	</p>
 	</div>	
 </div>

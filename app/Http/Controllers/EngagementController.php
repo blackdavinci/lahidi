@@ -20,6 +20,7 @@ use DB;
 use stdClass;
 use Carbon\Carbon;
 use DateTime;
+use Auth;
 
 class EngagementController extends Controller
 {
@@ -45,10 +46,16 @@ class EngagementController extends Controller
         $engagements = Engagement::with('secteur','categorie')->where('etat',1)->orderBy('updated_at','desc')->get();
         $secteurs = Secteur::where('etat',1)->orderBy('nom','asc')->get();
         $categories = Categorie::where('etat',1)->orderBy('designation','asc')->get();
+         $etats = Etat::where('etat',1)->orderBy('designation','asc')->get();  
         $nombre_engagement = count($engagements);
         
-
-        return view('admin.list-engagements',compact('active','secteurs','categories','engagements','nombre_engagement'));
+//         foreach ($engagements as $key => $value) {
+//             if($value->secteur_id==0){
+//                 var_dump($value->id.' => '.$value->intitule);
+//             }
+//         }
+// dd();
+        return view('admin.list-engagements',compact('active','secteurs','categories','engagements','nombre_engagement','etats'));
     }
 
     /**
@@ -72,6 +79,9 @@ class EngagementController extends Controller
         $engagement = Engagement::create($request->all());
 
         $engagement->etats()->attach(12);
+        if($request->input('etat_id')!=null){
+            $engagement->etats()->attach($request->input('etat_id'));
+        }
         
         return back();
     }
@@ -199,10 +209,9 @@ class EngagementController extends Controller
      */
     public function addEtat(Request $request, $id)
     {
-        
         $engagement = Engagement::findOrFail($id);
         $engagement->etats()->attach($request->input('etat_id'), ['titre_commentaire' => $request->input('titre_commentaire'),'commentaire'=>$request->input('commentaire')]);
-        return back();
+        return redirect(route('pw-admin-engagement.show',$id));
     }
 
 

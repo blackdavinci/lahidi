@@ -2,6 +2,19 @@ jQuery(document).ready(function($) {
 
 	$('[data-toggle="tooltip"]').tooltip();
 
+	// testimonial
+	var TestiSlide = $('.bxslider');
+	TestiSlide.bxSlider({
+		auto: true,
+		pager: false,
+		controls: false,
+		useCSS: false,
+		speed: 2000,
+		easing: 'easeOutElastic',
+		mode: 'horizontal',
+		controlDirections:true
+	});
+
 	$('#categorieTable').DataTable({
 		language: {
 		        url: '/../json/French.json'

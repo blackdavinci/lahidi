@@ -10,6 +10,8 @@ use App\Http\Requests\CreateCategorieRequest;
 use App\Categorie;
 use App\Engagement;
 
+use Auth;
+
 class CategorieController extends Controller
 {
     

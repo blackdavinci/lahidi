@@ -10,6 +10,45 @@
 		<div class="col-md-12">
 			<div ng-controller="graphController as graph">
 			<div class="row">
+				<div class="col-md-12 text-center hidden-xs" id="chrono">	
+					<div class="col-md-12"><h4><strong>Fin de mandat dans</strong></h4></div>
+					<div class="col-md-6 col-md-offset-3 " >
+						<script type="application/javascript">
+
+						var myCountdownTest = new Countdown({
+							year: 2020,
+							month	: 0, 
+							day		: 0,
+							width	: 500, 
+							height	: 70,
+							numbers		: 	{
+								font 	: "Open Sans, sans-serif",
+								color	: "#d9534f",
+								bkgd	: "#FFFFFF",
+								fontSize : 200,
+								rounded	: 0.15,				// percentage of size 
+								
+								},
+							labels	:	{
+                             	font  	: "Open Sans, sans-serif",
+	                            color 	: "#000000",
+	                            offset : 0, // Number of pixels to push the labels down away from numbers. 
+	                            textScale 	: 1, // Percentage of size
+	                            weight	: "bold"	// < - no comma on last item!
+                         },
+							hideLine	: true								
+														 	
+						});
+
+
+
+						</script>
+					</div>
+					<br/>
+					{{--*/ /*--}}
+				</div>
+			</div>
+			<div class="row">
 				<div class="col-md-4">
 					<div class="col-md-12">
 						<h4 class="text-upperscase text-center ">
@@ -152,11 +191,84 @@
 	</div>
 
 	<!-- Section Articles -->
-	
 	<div class="row">
-	
+		<div class="col-md-4">
+			<div class="section-head-title"><h4 ><strong><i class="fa fa-file-pdf-o" aria-hidden="true"></i>Documents et  Rapports MOSSEP</strong></h4></div>
+			<div class="col-md-12"  id="cadre-rapport">
+				@foreach($docs as $doc)
+					<div class="col-md-12">
+						<h5 class="text-justify">
+						<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+						<strong><a href="{{route('guest.article',$doc->slug)}}">{{$doc->titre}}</a></strong>
+						</h5>
+						<p class="text-justify">
+						{{substr($doc->contenu,0,100)}}..
+						<a href="{{route('guest.article',$doc->slug)}}" class="pull-right"><strong>Lire plus</strong></a>
+						</p>
+					</div>
+				@endforeach
+			</div>
+			{{--*/ var_dump(__DIR__)/*--}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="solidline"></div>
+		</div>			
+	</div>
+	<div class="row">
+		<div class="col-md-12 aligncenter">
+			<h3 class="title">What people <strong>saying</strong> about us</h3>
+			<div class="blankline30"></div>
+
+			<ul class="bxslider">
+				<li>
+					<blockquote>
+						Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis feugiat.Suspendisse eu erat quam. Vivamus porttitor eros quis nisi lacinia sed interdum lorem vulputate. Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis feugiat
+					</blockquote>
+					<div class="testimonial-autor">
+						<img src="img/dummies/testimonial/1.png" alt="" />
+						<h4>Hillary Doe</h4>
+						<a href="#">www.companyname.com</a>
+					</div>
+				</li>
+				<li>
+					<blockquote>
+						Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis feugiat.Suspendisse eu erat quam. Vivamus porttitor eros quis nisi lacinia sed interdum lorem vulputate. Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis feugiat
+					</blockquote>
+					<div class="testimonial-autor">
+						<img src="img/dummies/testimonial/2.png" alt="" />
+						<h4>Michael Doe</h4>
+						<a href="#">www.companyname.com</a>
+					</div>
+				</li>
+				<li>
+					<blockquote>
+						Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis feugiat.Suspendisse eu erat quam. Vivamus porttitor eros quis nisi lacinia sed interdum lorem vulputate. Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis feugiat
+					</blockquote>
+					<div class="testimonial-autor">
+						<img src="img/dummies/testimonial/3.png" alt="" />
+						<h4>Mark Donovan</h4>
+						<a href="#">www.companyname.com</a>
+					</div>
+				</li>
+				<li>
+					<blockquote>
+						Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis feugiat.Suspendisse eu erat quam. Vivamus porttitor eros quis nisi lacinia sed interdum lorem vulputate. Aliquam a orci quis nisi sagittis sagittis. Etiam adipiscing, justo quis feugiat
+					</blockquote>
+					<div class="testimonial-autor">
+						<img src="img/dummies/testimonial/4.png" alt="" />
+						<h4>Marry Doe Elliot</h4>
+						<a href="#">www.companyname.com</a>
+					</div>
+				</li>
+			</ul>
+
+		</div>	
 		
-	</div><!-- End Section -->
+	</div>
+
+	<!-- End Section -->
 	
 	<div class="row">
 		<div class="col-md-12">
@@ -178,7 +290,7 @@
 					<div class="col-md-3">
 						<div class="12">
 							<div class="embed-responsive embed-responsive-4by3">
-						    	<iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{$video->lien}}"></iframe>
+						    	<iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{$video->video}}"></iframe>
 							</div>
 						</div>
 						<div class="col-md-12">
@@ -196,7 +308,14 @@
 					@foreach($audios as $audio)
 					<div class="col-md-3">
 						<div class="12">
-							<iframe width="280" height="200" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{$audio->lien}}&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+							@if(strpos($audio->lien,"mixcloud")==false)
+									<iframe width="100%" height="210" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{$audio->audio}}&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+								
+							@else
+								
+									<iframe width="100%" height="210" src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2F{{$audio->audio}}2F&light=1" frameborder="0"></iframe>
+								
+							@endif
 						</div>
 						<div class="col-md-12">
 							<h5 class="medium-h5 text-left">{{$audio->titre}}</h5>

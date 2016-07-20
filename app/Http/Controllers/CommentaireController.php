@@ -9,6 +9,8 @@ use App\Http\Requests\CreateCommentaireRequest;
 use App\Commentaire;
 use DB;
 
+use Auth;
+
 class CommentaireController extends Controller
 {
     /**

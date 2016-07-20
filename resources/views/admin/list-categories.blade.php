@@ -95,7 +95,7 @@
 								</a>
 							</td>
 							<td>
-								<a href="" class="btn-action" data-toggle="modal" data-target="#deleteModal{{$categorie->id}}">
+								<a href="" class="btn-action @if(Auth::user()->role!='amdin') disabled @endif" data-toggle="modal" data-target="#deleteModal{{$categorie->id}}">
 									<i class="fa fa-trash fa-1x" aria-hidden="true"></i>
 								</a>
 							</td>

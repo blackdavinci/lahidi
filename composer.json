@@ -6,7 +6,8 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*"
+        "laravel/framework": "5.2.*",
+        "jgrossi/corcel": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -23,7 +24,8 @@
         "dusterio/link-preview": "~1.2",
         "kasp3r/link-preview": "dev-master",
         "cviebrock/eloquent-sluggable":"^4.0.2",
-        "thujohn/twitter": "~2.0"
+        "thujohn/twitter": "~2.0",
+        "jgrossi/corcel": "~1.1.0"
     },
     "autoload": {
         "classmap": [

@@ -87,7 +87,7 @@
 								</a>
 							</td>
 							<td>
-								<a href="" class="btn-action  @if($etat->id==23) disabled @endif" data-toggle="modal" data-target="#deleteModal{{$secteur->id}}">
+								<a href="" class="btn-action  @if($etat->id==23 || Auth::user()->role!='admin') disabled @endif" data-toggle="modal" data-target="#deleteModal{{$secteur->id}}">
 									<i class="fa fa-trash fa-1x" aria-hidden="true"></i>
 								</a>
 							</td>

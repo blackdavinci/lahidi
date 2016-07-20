@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateUserRequest;
 
 use App\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -28,11 +29,15 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $active = 'user';
-        $users = User::where('etat',1)->orderBy('updated_at')->get();
-        $nombre_user = count($users);
-        return view('admin.list-users',compact('active','users','nombre_user'));
+    { 
+        if(Auth::user()->role=='admin'){
+            $active = 'user';
+            $users = User::where('etat',1)->orderBy('updated_at')->get();
+            $nombre_user = count($users);
+            return view('admin.list-users',compact('active','users','nombre_user'));
+        }else{
+            return redirect('/logout')->withErrors("Vueillez vous connecter en tant qu\'administrateur");
+        }
     }
 
     /**
@@ -53,13 +58,19 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'role' => $request['role'],
-            'password' => bcrypt($request['password']),
-        ]);
-        return back();
+     
+                 
+        if(Auth::user()->role=='admin'){
+            User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'role' => $request->input('role'),
+                'password' => bcrypt($request->input('password')),
+            ]);
+            return back();
+        }else{
+            return redirect('/logout')->withErrors("Vueillez vous connecter en tant qu\'administrateur");
+        }
     }
 
     /**
@@ -91,9 +102,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateUserRequest $request, $id)
     {
-        //
+        if(Auth::user()->role=='admin'){
+            $user = User::findOrFail($id);
+            $user->update($request->all());
+            return back();
+        }else{
+             return redirect('/logout')->withErrors("Vueillez vous connecter en tant qu\'administrateur");
+        }
     }
 
     /**
@@ -104,6 +121,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        if(Auth::user()->role=='admin'){
+            $user = User::findOrFail($id);
+            $user->delete();
+            return back();
+        }else{
+            return redirect('/logout')->withErrors("Vueillez vous connecter en tant qu\'administrateur");
+        }
     }
 }

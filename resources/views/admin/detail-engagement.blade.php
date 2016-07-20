@@ -74,7 +74,6 @@
 				        <div class="form-group">
 				          <label for="etat">Etat</label>
 				          <select name="etat_id" id="etat" class="form-control" >
-				            <option value="0">Aucun</option>
 				            @foreach($etats as $etat)
 				              <option value="{{$etat->id}}" @foreach($engagement->etats as $etats)@if($etat->id==$etats->id) disabled class="text-danger" @endif @endforeach>
 				              {{$etat->designation}}
@@ -113,7 +112,7 @@
 								
 								<div class="table-responsive">
 								{!! Form::open(['method' =>'PUT','route' =>['pw-admin-engagement.update',$engagement->id]]) !!}
-								  <table class="table table-nobordered table-nobordered-top table-stripe" id="tableEngagement">
+								  <table class="table table-nobordered table-nobordered-top table-striped" id="tableEngagement">
 								    <tbody>
 								      
 								      <tr><td class="titleEngagement"><h4>Intitulé</h4></td></tr> 

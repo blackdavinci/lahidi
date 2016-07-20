@@ -90,6 +90,7 @@
 									<th>Titre</th>
 									<th>Contenu</th>
 									<th>Lien</th>
+									<th>Code</th>
 									<th >Edit.</th>
 									<th>Supp.</th>
 								</tr>
@@ -110,13 +111,28 @@
 										 <i>Aucun lien URL associé</i>
 										@else {{$article->lien}} @endif
 									</td>
+									<td>
+										@if($article->type=="audio")
+											@if($article->audio==null)
+												<i>Aucun code audio obtenu</i>
+											@else
+												{{$article->audio}}
+											@endif
+										@elseif($article->type=="video")
+											@if($article->video==null)
+												<i>Aucun code vidéo obtenu</i>
+											@else
+												{{$article->video}}
+											@endif
+										@endif
+									</td>
 									<td class="">
-										<a href="" class="btn-action" data-toggle="modal" data-target="#editModal{{$article->id}}">
+										<a href="{{route('pw-admin-article.edit',$article->id)}}" class="btn-action">
 											<i class="fa fa-edit fa-1x" aria-hidden="true"></i>
 										</a>
 									</td>
 									<td>
-										<a href="" class="btn-action" data-toggle="modal" data-target="#deleteModal{{$article->id}}">
+										<a href="" class="btn-action @if(Auth::user()->role!='amdin') disabled' @endif" data-toggle="modal" data-target="#deleteModal{{$article->id}}" >
 											<i class="fa fa-trash fa-1x" aria-hidden="true"></i>
 										</a>
 									</td>

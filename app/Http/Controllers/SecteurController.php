@@ -10,6 +10,8 @@ use App\Http\Requests\CreateSecteurRequest;
 use App\Secteur;
 use App\Engagement;
 
+use Auth;
+
 class SecteurController extends Controller
 {
     /**

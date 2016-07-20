@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf_token" content="{{ csrf_token() }}">
 <title>@yield('title')</title>
 
 <!-- Bootstrap Core CSS -->
@@ -42,6 +43,8 @@
 <!--Icons-->
 {!! HTML::script('js/lumino.glyphs.js') !!}
 
+{{-- CkEditor CDN --}}
+{{-- {!! HTML::script('//cdn.ckeditor.com/4.5.9/standard/ckeditor.js') !!} --}}
 
 </head>
 
@@ -90,15 +93,19 @@
 			<li class="@if($active=='secteur') active @endif">
 				<a href="{{route('pw-admin-secteur.index')}}"><i class="fa fa-pie-chart" aria-hidden="true"></i> Secteurs</a>
 			</li>
-			<li class="@if($active=='etat') active @endif">
-				<a href="{{route('pw-admin-etat.index')}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Etats</a>
-			</li>
+			@if(Auth::user()->role=='admin')
+				<li class="@if($active=='etat') active @endif">
+					<a href="{{route('pw-admin-etat.index')}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Etats</a>
+				</li>
+			@endif
 			<li class="@if($active=='artcile') active @endif">
 				<a href="{{route('pw-admin-article.index')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Articles</a>
 			</li>
-			<li class="@if($active=='user') active @endif">
-				<a href="{{route('pw-admin-user.index')}}"><i class="fa fa-users" aria-hidden="true"></i> Utilisateurs</a>
-			</li>
+			@if(Auth::user()->role=='admin')
+				<li class="@if($active=='user') active @endif">
+					<a href="{{route('pw-admin-user.index')}}"><i class="fa fa-users" aria-hidden="true"></i> Utilisateurs</a>
+				</li>
+			@endif
 		</ul>
 
 	</div><!--/.sidebar-->

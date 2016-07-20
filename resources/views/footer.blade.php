@@ -99,7 +99,17 @@
                               color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                           }
                       }
-                  }
+                  },
+                  series: {
+                                  cursor: 'pointer',
+                                  point: {
+                                      events: {
+                                          click: function () {
+                                              location.href = this.options.url;
+                                          }
+                                      }
+                                  }
+                              }
               },
               series: [{
                   name: 'Verdict',
@@ -141,7 +151,17 @@
                               color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                           }
                       }
-                  }
+                  },
+                  series: {
+                                  cursor: 'pointer',
+                                  point: {
+                                      events: {
+                                          click: function () {
+                                              location.href = this.options.url;
+                                          }
+                                      }
+                                  }
+                              }
               },
               series: [{
                   name: 'Secteur',

@@ -38,6 +38,8 @@ Route::get('detail-promesse/{slug}',['as'=>'guest.engagementDetail','uses'=>'Gue
 
 Route::get('detail-article/{slug}',['as'=>'guest.article','uses'=>'GuestController@articleShow']);
 
+Route::get('telechargement/{name}',['as'=>'guest.download','uses'=>'GuestController@downloadDoc']);
+
 // Route::post('promesses-filtre',['as'=>'guest.promessesfilter','uses'=>'GuestController@promessesFilter']);
 
 Route::get('promesses-filtre',['as'=>'guest.promesssefilter','uses'=>'GuestController@promessesFilter']);

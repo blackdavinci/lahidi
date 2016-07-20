@@ -5,12 +5,13 @@
 <html lang="en" ng-app="lahidiApp">
 <head>
     <meta charset="utf-8">
-    <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Plateforme de suivi et d'évaluation des promesses du Président Alpha Condé et celles de son Gouvernement." />
     <meta name="Cissé Ousmane" content="ABLOGUI (Association des Blogueurs de Guinée)" />
+    <meta name="csrf_token" content="{{ csrf_token() }}">
 
-    
+    <title>@yield('title')</title>
+
     <!-- Bootstrap Core & Custom CSS -->
 	{!! Html::style('css/bootstrap.min.css') !!}
 	{!! Html::style('css/carousel.css') !!}
@@ -38,8 +39,11 @@
    <!-- Custom Fonts -->
 	{!! Html::style('css/font-awesome.css') !!}
 
+	<!-- Countdown CSS -->
+	{!! Html::style('css/jquery.countdown.css') !!}
+
 	<!-- Charts JS -->
-	@yield('head')
+	
 	{!! Html::script("js/jquery-1.12.3.js") !!}
 	{!! Html::script("js/highcharts/highcharts.js") !!}
 	{!! Html::script("js/highcharts/modules/data.js") !!}
@@ -47,9 +51,44 @@
 	{!! Html::script("http://maps.google.com/maps/api/js?sensor=false") !!}
 	{!! Html::script("js/jquery.gmap.min.js") !!}
 
+	{{-- Countdown Script --}}
+	{!! Html::script("js/countdown.js") !!}
+	
+
+	@yield('head')
+
 </head>
 
 <body>
+{{-- Facebook SDK Script --}}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+{{-- Twitter SDK Script --}}
+
+<script>window.twttr = (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+  if (d.getElementById(id)) return t;
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "https://platform.twitter.com/widgets.js";
+  fjs.parentNode.insertBefore(js, fjs);
+ 
+  t._e = [];
+  t.ready = function(f) {
+    t._e.push(f);
+  };
+ 
+  return t;
+}(document, "script", "twitter-wjs"));</script>
+
 
 <!-- options panel -->
 
@@ -111,8 +150,8 @@
 	</footer>
 </div>
 <a href="#" class="scrollup"><i class="fa fa-angle-up fa fa-square fa fa-bglight fa fa-2x active bt-theme"></i></a>	
-
-  <!-- HighCharts Script -->
+@include('footer')
+  {{-- <!-- HighCharts Script -->
 <script type="text/javascript">
 	// Map Script 
 	$('#location').gMap({
@@ -127,27 +166,26 @@
 	        }
 	    ]
 	});
-</script>
+</script> --}}
 
-@include('footer')
     <!-- javascript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         {!! Html::script("js/jquery-1.12.3.js") !!}
         {{-- {!! Html::script("js/eterna/jquery.js") !!} --}}
-    	{{-- {!! Html::script("js/eterna/jquery.easing.1.3.js") !!}
+    	{!! Html::script("js/eterna/jquery.easing.1.3.js") !!}
     	 	
-    	{!! Html::script("js/eterna/modernizr.custom.js") !!}
+    	{{-- {!! Html::script("js/eterna/modernizr.custom.js") !!}
     	{!! Html::script("js/eterna/toucheffects.js") !!}
-    	{!! Html::script("js/eterna/google-code-prettify/prettify.js") !!}	
+    	{!! Html::script("js/eterna/google-code-prettify/prettify.js") !!} --}}	
     	{!! Html::script("js/eterna/jquery.bxslider.min.js") !!} 
-    	{!! Html::script("js/eterna/camera/camera.js") !!}
-    	{!! Html::script("js/eterna/camera/setting.js") !!}
+    	{{-- {!! Html::script("js/eterna/camera/camera.js") !!}
+    	{!! Html::script("js/eterna/camera/setting.js") !!} --}}
     	
-    	{!! Html::script("js/eterna/jquery.prettyPhoto.js") !!}
+    	{{-- {!! Html::script("js/eterna/jquery.prettyPhoto.js") !!}
     	{!! Html::script("js/eterna/portfolio/jquery.quicksand.js") !!} 
     	{!! Html::script("js/eterna/portfolio/setting.js") !!} 	
-    	{!! Html::script("js/eterna/jquery.tweet.js") !!} --}} 
+    	{!! Html::script("js/eterna/jquery.tweet.js") !!}  --}}
 
     	<!-- Bootstrap Core JavaScript -->
     	{{-- {!! Html::script("js/jquery-1.12.3.js") !!} --}}
@@ -159,15 +197,15 @@
 		{!! Html::script("js/app.js") !!}
 		
 
-    	{!! Html::script("js/eterna/jquery.flexslider.js") !!} 
+    	{{-- {!! Html::script("js/eterna/jquery.flexslider.js") !!} 
     	{!! Html::script("js/eterna/animate.js") !!}
     	{!! Html::script("js/eterna/inview.js") !!}
-    	{!! Html::script("js/eterna/custom.js") !!}
+    	{!! Html::script("js/eterna/custom.js") !!} --}}
 	
 
-    	{!! Html::script("js/eterna/jquery.cookie.js") !!}
+    	{{-- {!! Html::script("js/eterna/jquery.cookie.js") !!}
     	{!! Html::script("colorpicker/js/colorpicker.js") !!}
-    	{!! Html::script("js/eterna/optionspanel.js") !!}
+    	{!! Html::script("js/eterna/optionspanel.js") !!} --}}
    	
    		
    		

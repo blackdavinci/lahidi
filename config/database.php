@@ -66,6 +66,19 @@ return [
             'engine' => null,
         ],
 
+        // 'wordpress' => [ // this is your Corcel database connection, where WordPress tables are
+        //         'driver'    => 'mysql',
+        //         'host'      => 'lahidiorefpromu.mysql.db',
+        //         'database'  => 'lahidiorefpromu',
+        //         'username'  => 'lahidiorefpromu',
+        //         'password'  => 'Depression21',
+        //         'charset'   => 'utf8',
+        //         'collation' => 'utf8_unicode_ci',
+        //         'prefix'    => 'wor2963_',
+        //         'strict'    => false,
+        //         'engine'    => null,
+        // ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', 'localhost'),

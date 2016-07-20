@@ -7,20 +7,19 @@
   </ol>
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      {!! Html::image('images/slides/1.jpg','First slide ',array('class' => 'first-slide')) !!}
+      {!! Html::image('images/slides/bg.jpg','First slide ',array('class' => 'first-slide')) !!}
       <div class="container">
         <div class="carousel-caption">
-         
-          
+          {!! Html::image('images/slides/1.jpg','Second slide ',array('class' => 'second-slide')) !!}
         </div>
       </div>
     </div>
     <div class="item">
-      {!! Html::image('images/slides/2.jpg','Second slide ',array('class' => 'second-slide')) !!}
+      {!! Html::image('images/slides/bg.jpg','Second slide ',array('class' => 'second-slide')) !!}
 
       <div class="container">
         <div class="carousel-caption">
-          
+                {!! Html::image('images/slides/4.jpg','Second slide ',array('class' => 'second-slide')) !!}
         </div>
       </div>
     </div>

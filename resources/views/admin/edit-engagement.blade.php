@@ -47,7 +47,6 @@
 							       <tr>
 							       	<td class="dataEngagement text-success">
 							       		<select name="categorie_id" id="secteur" class="form-control" >
-							       			<option value="0">Aucune</option>
 							       			@foreach($categories as $categorie)
 							       				<option value="{{$categorie->id}}" @if($engagement->categorie_id == $categorie->id) selected @endif>{{$categorie->designation}}</option>
 							       			@endforeach	
@@ -58,7 +57,6 @@
 							      <tr>
 							      	<td class="dataEngagement">
 							      		<select name="secteur_id" id="secteur" class="form-control" >
-							      			<option value="0">Aucun</option>
 							      			@foreach($secteurs as $secteur)
 							      				<option value="{{$secteur->id}}" @if($engagement->secteur_id == $secteur->id) selected @endif>{{$secteur->nom}}</option>
 							      			@endforeach		
@@ -94,7 +92,7 @@
 							       </tr>
 							       <tr>
 							       	<td>
-							       		<button type="submit" class="btn btn-default text-uppercase">Enregistrer</button>
+							       		<button type="submit" class="btn btn-success text-uppercase">Enregistrer</button>
 							       	</td>
 							       </tr>
 							    </tbody>
